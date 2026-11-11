@@ -1,0 +1,19 @@
+# DHbox website (dhbox.devhouse.vn).
+# Runs the static site behind nginx on HOST_PORT (default 3120, loopback only).
+# Put the host nginx/Caddy with HTTPS in front: see deploy/nginx-host.conf.
+services:
+  web:
+    build:
+      context: .
+    image: dhbox-website:latest
+    container_name: dhbox-website
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${HOST_PORT:-3120}:80"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    security_opt:
+      - no-new-privileges:true

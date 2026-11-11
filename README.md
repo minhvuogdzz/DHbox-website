@@ -39,6 +39,19 @@ Thêm `?dryrun` vào địa chỉ để thử luồng tải mà không tải t�
 
 Giá, số ngày dùng thử và số máy đặt ở đầu `assets/js/main.js` (`PRICING`) và trong phần Giá của `index.html`. Máy chủ bản quyền (`/api/config`) chưa bật CORS nên trang chưa đọc giá trực tiếp; đổi giá trong trang quản trị thì sửa cả ở đây.
 
-## Triển khai
+## Triển khai (DevOps)
 
-Trang tĩnh, đưa lên đâu cũng được: Cloudflare Pages, GitHub Pages, Netlify hoặc máy chủ có sẵn của Devhouse. Không có bước build; thư mục gốc là thư mục xuất bản.
+Trang chạy tại **dhbox.devhouse.vn**. Image là nginx phục vụ tệp tĩnh, không có bước build mã nguồn.
+
+```bash
+docker compose up -d --build
+```
+
+- Container `dhbox-website` mở cổng `127.0.0.1:3120` (đổi bằng biến `HOST_PORT`), chỉ nghe trên loopback.
+- Đặt nginx hoặc Caddy của máy chủ phía trước để lấy HTTPS: mẫu ở `deploy/nginx-host.conf`, sau đó `certbot --nginx -d dhbox.devhouse.vn`.
+- DNS: bản ghi A (hoặc CNAME) của `dhbox.devhouse.vn` trỏ về máy chủ.
+- Kiểm tra sống: `GET /healthz` trả `ok` (healthcheck của container dùng đường này).
+- Không có secret hay biến môi trường bắt buộc. Trang chỉ gọi GitHub API từ trình duyệt của khách để lấy bản `.dmg` mới nhất.
+- Cập nhật nội dung: `git pull && docker compose up -d --build`.
+
+Lưu ý: Dockerfile, nginx.conf và compose chưa được build thử trên máy viết (không có Docker), nên lần build đầu cần để ý lỗi nhỏ.
