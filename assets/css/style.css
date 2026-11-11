@@ -211,12 +211,7 @@ kbd {
 }
 .pill-tag:hover { border-color: var(--accent); }
 .pill-tag__ver { padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-family: var(--mono); font-size: 0.78rem; }
-.hero__title { margin-top: 26px; font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.04; max-width: 19ch; text-wrap: balance; }
-.grad {
-  display: block;
-  background: var(--title-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+.hero__title { margin-top: 26px; font-size: clamp(2.4rem, 6vw, 4.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.14; max-width: 19ch; text-wrap: balance; padding-bottom: 0.08em; }
 .hero__lead { margin-top: 22px; max-width: 680px; font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--text-2); }
 .hero__cta { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; justify-content: center; }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 0.84rem; color: var(--text-3); }
@@ -916,3 +911,16 @@ button.chip:active { transform: scale(0.96); }
 .clip__row span:first-child { min-width: 0; }
 .isl-shape { grid-template-columns: minmax(0, 1fr); }
 html { overflow-x: clip; }
+
+/* Hero headline: solid colour, a hand-drawn underline under the key words */
+:root { --hl: #2d5b98; --mark: #4aa3bd; }
+:root[data-theme="dark"], .theme-dark { --hl: #8ab7e0; --mark: #5fb0c6; }
+.hl { display: block; color: var(--hl); }
+.mark { position: relative; display: inline-block; white-space: nowrap; }
+.mark__line { position: absolute; left: -3%; bottom: -0.2em; width: 106%; height: 0.36em; overflow: visible; pointer-events: none; }
+.mark__line { clip-path: inset(-20% 100% -20% 0); animation: drawLine 0.9s var(--ease) 0.9s forwards; }
+.mark__line path { fill: none; stroke: var(--mark); stroke-linecap: round; stroke-width: 7; vector-effect: non-scaling-stroke; }
+.mark__line path + path { stroke-width: 4; opacity: 0.55; }
+@keyframes drawLine { to { clip-path: inset(-20% -5% -20% 0); } }
+@media (max-width: 680px) { .mark__line path { stroke-width: 5; } .mark__line path + path { stroke-width: 3; } }
+@media (prefers-reduced-motion: reduce) { .mark__line { clip-path: none; animation: none; } }
