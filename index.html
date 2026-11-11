@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DHbox — Mọi thứ macOS còn thiếu, gói gọn trong một chiếc hộp</title>
   <meta name="description" content="DHbox là app tiện ích cho Mac chạy trên thanh menu: Soft Notch, xem trước cửa sổ, Hộp đen chẩn đoán máy chậm, tua lại tệp, cảnh báo secret, thư viện hành động và AI chạy ngay trên máy. Dùng thử 7 ngày, mua một lần dùng trọn đời.">
-  <meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#F5F7FB" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#F6F7FA">
   <meta property="og:type" content="website">
   <meta property="og:title" content="DHbox — Mọi thứ macOS còn thiếu, gói gọn trong một chiếc hộp">
   <meta property="og:description" content="Hơn 60 công cụ cho Mac, nhẹ CPU, xử lý trên máy. Dùng thử 7 ngày, mua một lần dùng trọn đời.">
@@ -52,6 +51,8 @@
       <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
       <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
       <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13M15.5 5.5v13"/></symbol>
+      <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4.5 9.5 9 5"/><path d="M4.5 9.5H15a5 5 0 0 1 0 10h-3"/></symbol>
       <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.5 3h7.5l4.5 4.5V19a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v4.5h4.5M8.5 13h7M8.5 16.5h5"/></symbol>
       <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m3.5 17.5 5-5 4 4 2.5-2.5 5 5"/></symbol>
       <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5M12.5 15h4.5"/></symbol>
@@ -133,32 +134,36 @@
           <li>Phiên bản <span data-release-version>1.4</span></li>
         </ul>
 
-        <!-- Hero mockup: a Mac desktop with the Soft Notch open and the tray overview -->
-        <div class="screen rise" style="--d:400ms" aria-label="Minh họa DHbox trên màn hình Mac" role="img">
-          <div class="screen__display">
+        <div class="screen rise" style="--d:400ms" id="demo-screen">
+          <div class="screen__display" data-display>
             <div class="mbar">
-              <div class="mbar__left"><b>Finder</b><span>Tệp</span><span>Sửa</span><span>Xem</span><span>Đi</span><span>Cửa sổ</span></div>
-              <div class="mbar__notch"></div>
+              <div class="mbar__left"><b data-front-name>Finder</b><span>Tệp</span><span>Sửa</span><span>Xem</span><span>Đi</span><span>Cửa sổ</span></div>
               <div class="mbar__right">
-                <img class="mbar__tray" src="assets/img/favicon.png" alt="">
-                <span class="mono">78%</span><span>Th 4 11 thg 11&nbsp; 9:41</span>
+                <span class="mbar__awake" data-awake-icon hidden><svg class="ico"><use href="#i-cup"/></svg></span>
+                <button class="mbar__tray is-on" type="button" data-tray-toggle aria-label="Bảng DHbox trên thanh menu" aria-expanded="true"><img src="assets/img/favicon.png" alt=""></button>
+                <span class="mono">78%</span><span class="mbar__clock" data-clock>Th 4 11 thg 11&nbsp; 9:41</span>
               </div>
             </div>
 
-            <div class="snotch">
-              <div class="snotch__head"></div>
-              <div class="snotch__body">
-                <div class="snotch__row snotch__music">
+            <!-- Soft Notch: one black shape hanging from the top edge; it morphs between closed, live and open -->
+            <div class="island" data-island data-state="closed" tabindex="0" role="button" aria-expanded="false" aria-label="Soft Notch. Rê chuột hoặc bấm để mở">
+              <div class="island__live" aria-hidden="true">
+                <span class="island__live-l"><svg class="ico"><use href="#i-cup"/></svg></span>
+                <span class="island__live-r mono" data-awake-time>59:59</span>
+              </div>
+              <div class="island__content">
+                <div class="isl-row">
                   <div class="cover"></div>
-                  <div class="snotch__text"><b>Lofi cho buổi sáng</b><span>Spotify</span></div>
+                  <div class="isl-text"><b>Lofi cho buổi sáng</b><span>Spotify · 1:12 / 3:05</span></div>
+                  <button class="isl-btn" type="button" data-play aria-label="Tạm dừng nhạc"><svg class="ico"><use href="#i-pause"/></svg></button>
                   <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
                 </div>
-                <div class="snotch__alert">
+                <div class="isl-alert" data-freeze-row>
                   <span class="dot dot--warn"></span>
-                  <div class="snotch__text"><b>Chrome Helper dùng 41% CPU</b><span>Không mở trong 25 phút</span></div>
-                  <span class="chip chip--accent">Đóng băng</span>
+                  <div class="isl-text"><b data-freeze-title>Chrome Helper dùng 41% CPU</b><span data-freeze-sub>Không mở trong 25 phút</span></div>
+                  <button class="chip chip--accent" type="button" data-freeze>Đóng băng</button>
                 </div>
-                <div class="snotch__shelf">
+                <div class="isl-shelf">
                   <span class="shelf-file"><svg class="ico"><use href="#i-doc"/></svg>bao-gia-Q4.pdf</span>
                   <span class="shelf-file"><svg class="ico"><use href="#i-image"/></svg>logo@2x.png</span>
                   <span class="shelf-file shelf-file--more">+3</span>
@@ -166,30 +171,89 @@
               </div>
             </div>
 
-            <div class="tray">
-              <div class="tray__tabs">
-                <span class="is-on">Tổng quan</span><span>Âm thanh</span><span>Mạng</span><span>Pin</span>
+            <!-- Desktop windows -->
+            <div class="win" data-win="finder" data-app="finder" data-title="Tài liệu" style="--x:4%;--y:30%;--w:36%;--z:3">
+              <div class="win__bar"><i></i><i></i><i></i><span>Tài liệu</span></div>
+              <div class="win__files">
+                <span><svg class="ico"><use href="#i-folder"/></svg>Dự án</span>
+                <span><svg class="ico"><use href="#i-doc"/></svg>Hợp đồng.docx</span>
+                <span><svg class="ico"><use href="#i-image"/></svg>banner.heic</span>
+                <span><svg class="ico"><use href="#i-doc"/></svg>.env</span>
               </div>
-              <div class="tray__grid">
-                <div class="metric"><span>CPU</span><b class="mono">12%</b><i style="--v:.12"></i></div>
-                <div class="metric"><span>Bộ nhớ</span><b class="mono">14,2 GB</b><i style="--v:.58"></i></div>
-                <div class="metric"><span>Áp lực</span><b><span class="dot dot--ok"></span> Bình thường</b></div>
-                <div class="metric"><span>Mạng</span><b class="mono">↓ 48 ↑ 6 Mb/s</b></div>
+            </div>
+            <div class="win win--notes" data-win="notes" data-app="notes" data-title="Kế hoạch Q4" style="--x:17%;--y:53%;--w:30%;--z:2">
+              <div class="win__bar"><i></i><i></i><i></i><span>Kế hoạch Q4</span></div>
+              <div class="win__doc">
+                <b>Kế hoạch Q4</b>
+                <p>Ra mắt DHbox 1.5, chạy thử với 30 khách hàng.</p>
+                <p class="win__check"><svg class="ico"><use href="#i-check"/></svg>Chốt bảng giá</p>
+                <p class="win__check"><svg class="ico"><use href="#i-check"/></svg>Gửi báo giá chị Lan</p>
               </div>
-              <div class="tray__row"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức</span><span class="switch is-on"></span></div>
-              <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Zoom</span><span class="slider"><i style="--v:.7"></i></span></div>
-              <div class="tray__foot"><span class="dot dot--ok"></span><span>DHbox dùng <b class="mono">0,2%</b> CPU</span></div>
+            </div>
+            <div class="win win--web" data-win="web1" data-app="web" data-title="devhouse.vn" style="--x:50%;--y:51%;--w:32%;--z:1">
+              <div class="win__bar"><i></i><i></i><i></i><span class="win__url mono">devhouse.vn</span></div>
+              <div class="win__site"><i class="w1"></i><i class="w2"></i><div class="win__cards"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="win win--web is-min" data-win="web2" data-app="web" data-title="DHbox-releases" style="--x:40%;--y:40%;--w:32%;--z:0">
+              <div class="win__bar"><i></i><i></i><i></i><span class="win__url mono">github.com/…/releases</span></div>
+              <div class="win__site win__site--alt"><i class="w1"></i><i class="w3"></i><i class="w3"></i><i class="w3"></i></div>
             </div>
 
-            <div class="desk-win">
-              <div class="desk-win__bar"><i></i><i></i><i></i><span>Tài liệu</span></div>
-              <div class="desk-win__body">
-                <span class="file-tile"><svg class="ico"><use href="#i-folder"/></svg>Dự án</span>
-                <span class="file-tile"><svg class="ico"><use href="#i-doc"/></svg>Hợp đồng.docx</span>
-                <span class="file-tile"><svg class="ico"><use href="#i-image"/></svg>banner.heic</span>
-                <span class="file-tile"><svg class="ico"><use href="#i-doc"/></svg>.env</span>
+            <!-- Tray overview -->
+            <div class="tray" data-tray>
+              <div class="tray__tabs" role="tablist" aria-label="Bảng DHbox">
+                <button type="button" class="is-on" data-tray-tab="overview">Tổng quan</button>
+                <button type="button" data-tray-tab="sound">Âm thanh</button>
+                <button type="button" data-tray-tab="net">Mạng</button>
+                <button type="button" data-tray-tab="power">Pin</button>
               </div>
+              <div class="tray__pane is-on" data-tray-pane="overview">
+                <div class="tray__grid">
+                  <div class="metric"><span>CPU</span><b class="mono" data-cpu>12%</b><i style="--v:.12" data-cpu-bar></i></div>
+                  <div class="metric"><span>Bộ nhớ</span><b class="mono" data-mem>14,2 GB</b><i style="--v:.58" data-mem-bar></i></div>
+                  <div class="metric"><span>Áp lực</span><b><span class="dot dot--ok"></span> Bình thường</b></div>
+                  <div class="metric"><span>Mạng</span><b class="mono" data-net-mini>↓ 48 ↑ 6 Mb/s</b></div>
+                </div>
+                <div class="tray__row"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức 1 giờ</span><button class="switch" type="button" role="switch" aria-checked="false" aria-label="Giữ máy thức" data-awake></button></div>
+                <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Âm lượng</span><input class="range" type="range" min="0" max="100" value="64" aria-label="Âm lượng"></div>
+              </div>
+              <div class="tray__pane" data-tray-pane="sound" hidden>
+                <div class="mixer mixer--sm">
+                  <label class="mixer__row"><span class="app-dot" style="--h:215"></span><span>Zoom</span><input class="range" type="range" min="0" max="100" value="85" data-vol><b class="mono">85</b></label>
+                  <label class="mixer__row"><span class="app-dot" style="--h:140"></span><span>Spotify</span><input class="range" type="range" min="0" max="100" value="30" data-vol><b class="mono">30</b></label>
+                  <label class="mixer__row"><span class="app-dot" style="--h:25"></span><span>Safari</span><input class="range" type="range" min="0" max="100" value="60" data-vol><b class="mono">60</b></label>
+                </div>
+              </div>
+              <div class="tray__pane" data-tray-pane="net" hidden>
+                <div class="tray__grid">
+                  <div class="metric"><span>Tải xuống</span><b class="mono" data-speed-down>— Mb/s</b></div>
+                  <div class="metric"><span>Tải lên</span><b class="mono" data-speed-up>— Mb/s</b></div>
+                </div>
+                <button class="tray__btn" type="button" data-speedtest>Đo tốc độ</button>
+              </div>
+              <div class="tray__pane" data-tray-pane="power" hidden>
+                <div class="tray__grid">
+                  <div class="metric"><span>Pin</span><b class="mono">78%</b><i style="--v:.78"></i></div>
+                  <div class="metric"><span>Sức khỏe</span><b class="mono">96%</b></div>
+                  <div class="metric"><span>Số lần sạc</span><b class="mono">212</b></div>
+                  <div class="metric"><span>Nhiệt độ pin</span><b class="mono">31 °C</b></div>
+                </div>
+              </div>
+              <div class="tray__foot"><span class="dot dot--ok"></span><span>DHbox dùng <b class="mono" data-self-cpu>0,2%</b> CPU</span></div>
             </div>
+
+            <!-- Dock with window previews -->
+            <div class="dock" data-dock>
+              <div class="peek" data-peek hidden></div>
+              <button class="dock__app is-running" type="button" data-dock-app="finder" aria-label="Finder" style="--h:205"><svg class="ico"><use href="#i-folder"/></svg></button>
+              <button class="dock__app is-running" type="button" data-dock-app="notes" aria-label="Ghi chú" style="--h:42"><svg class="ico"><use href="#i-doc"/></svg></button>
+              <button class="dock__app is-running" type="button" data-dock-app="web" aria-label="Trình duyệt" style="--h:190"><svg class="ico"><use href="#i-search"/></svg></button>
+              <button class="dock__app" type="button" data-dock-app="music" aria-label="Nhạc" style="--h:340"><svg class="ico"><use href="#i-play"/></svg></button>
+              <span class="dock__sep"></span>
+              <button class="dock__app dock__app--dhbox" type="button" data-dock-app="dhbox" aria-label="DHbox"><img src="assets/img/dhbox-icon-256.png" alt=""></button>
+            </div>
+
+            <p class="screen__hint" data-hint>Thử rê chuột lên tai thỏ, lên Dock, hoặc bấm icon DHbox trên thanh menu</p>
           </div>
           <div class="screen__chin"></div>
         </div>
@@ -266,7 +330,7 @@
     </section>
 
     <!-- SOFT NOTCH -->
-    <section class="section feature" id="soft-notch">
+    <section class="section feature theme-dark band" id="soft-notch">
       <div class="container feature__grid">
         <div class="feature__copy">
           <p class="eyebrow"><svg class="ico"><use href="#i-notch"/></svg>Soft Notch</p>
@@ -282,23 +346,24 @@
         </div>
         <div class="feature__art">
           <div class="art art--notch">
-            <div class="art-notch">
-              <div class="art-notch__head"></div>
-              <div class="art-notch__panel">
-                <div class="palette">
-                  <div class="palette__input"><svg class="ico"><use href="#i-search"/></svg><span class="typed" data-typed="giu may thuc|dong bang chrome|bo dau|xem cong 3000">giu may thuc</span><i class="caret"></i></div>
-                  <div class="palette__item is-on"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức 1 giờ</span><kbd>↩</kbd></div>
-                  <div class="palette__item"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức đến khi tắt</span></div>
-                  <div class="palette__item"><svg class="ico"><use href="#i-clock"/></svg><span>Hẹn giờ 25 phút</span></div>
-                </div>
-                <div class="clip">
-                  <p class="clip__label">Clipboard</p>
-                  <div class="clip__row"><span class="mono">npm run dev -- --port 3000</span><span>2 phút</span></div>
-                  <div class="clip__row clip__row--secret"><span class="mono">sk-•••••••••••••••••</span><span class="chip chip--warn">Secret, tự xóa</span></div>
-                  <div class="clip__row"><span>Gửi chị Lan bản báo giá mới nhé</span><span>8 phút</span></div>
-                </div>
+            <div class="isl-shape isl-shape--panel">
+              <div class="palette" data-palette>
+                <label class="palette__input">
+                  <svg class="ico"><use href="#i-search"/></svg>
+                  <input type="text" data-palette-input placeholder="Gõ lệnh, không cần dấu" aria-label="Thử ô lệnh Soft Notch" autocomplete="off" spellcheck="false">
+                  <kbd>⌃⌥N</kbd>
+                </label>
+                <div class="palette__list" data-palette-list role="listbox" aria-label="Lệnh gợi ý"></div>
+                <div class="palette__done" data-palette-done hidden><svg class="ico"><use href="#i-check"/></svg><span></span></div>
+              </div>
+              <div class="clip">
+                <p class="clip__label">Clipboard</p>
+                <div class="clip__row"><span class="mono">npm run dev -- --port 3000</span><span>2 phút</span></div>
+                <div class="clip__row clip__row--secret" data-clip-secret><span class="mono">sk-•••••••••••••••••</span><span class="chip chip--warn">Tự xóa sau <b class="mono" data-clip-count>12</b> giây</span></div>
+                <div class="clip__row"><span>Gửi chị Lan bản báo giá mới nhé</span><span>8 phút</span></div>
               </div>
             </div>
+            <p class="art__hint">Gõ thử “giu may”, “dong bang” hay “cong 3000”, rồi nhấn Enter.</p>
           </div>
         </div>
       </div>
@@ -319,26 +384,24 @@
           </ul>
         </div>
         <div class="feature__art">
-          <div class="art art--dock">
-            <div class="dockprev">
-              <div class="dockprev__thumbs">
-                <div class="thumb"><div class="thumb__win"><i></i><i></i><i></i></div><span>Bảng giá 2026</span></div>
-                <div class="thumb is-on"><div class="thumb__win thumb__win--b"><i></i><i></i><i></i></div><span>Kế hoạch Q4</span></div>
-                <div class="thumb"><div class="thumb__win thumb__win--c"><i></i><i></i><i></i></div><span>Hóa đơn tháng 11</span></div>
-              </div>
-              <div class="dockbar">
-                <span class="dock-ic" style="--h:200"></span>
-                <span class="dock-ic" style="--h:150"></span>
-                <span class="dock-ic is-on" style="--h:215"></span>
-                <span class="dock-ic" style="--h:260"></span>
-                <span class="dock-ic" style="--h:20"></span>
-                <span class="dock-ic" style="--h:330"></span>
-              </div>
+          <div class="art art--windows" data-cmdtab tabindex="0" aria-label="Thử Command Tab: bấm ảnh xem trước hoặc dùng phím mũi tên">
+            <div class="mini-win" data-mw="sheet" data-title="Bảng giá 2026" style="--x:5%;--y:6%">
+              <div class="win__bar"><i></i><i></i><i></i><span>Bảng giá 2026</span></div>
+              <div class="mini-sheet"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
             </div>
-            <div class="cmdtab">
-              <kbd>⌘</kbd><kbd>tab</kbd>
-              <div class="cmdtab__list"><i></i><i class="is-on"></i><i></i><i></i></div>
+            <div class="mini-win" data-mw="notes" data-title="Kế hoạch Q4" style="--x:20%;--y:13%">
+              <div class="win__bar"><i></i><i></i><i></i><span>Kế hoạch Q4</span></div>
+              <div class="win__doc"><b>Kế hoạch Q4</b><p>Ra mắt bản 1.5, chạy thử 30 khách.</p><p class="win__check"><svg class="ico"><use href="#i-check"/></svg>Chốt bảng giá</p></div>
             </div>
+            <div class="mini-win" data-mw="invoice" data-title="Hóa đơn tháng 11" style="--x:35%;--y:20%">
+              <div class="win__bar"><i></i><i></i><i></i><span>Hóa đơn tháng 11</span></div>
+              <div class="mini-invoice"><b>Hóa đơn #1124</b><i></i><i></i><i></i><span class="mono">Tổng: 12.400.000đ</span></div>
+            </div>
+            <div class="switcher" data-switcher>
+              <div class="switcher__list" data-switcher-list></div>
+              <p class="switcher__title" data-switcher-title>Kế hoạch Q4</p>
+            </div>
+            <button class="keycap" type="button" data-cmdtab-next><kbd>⌘</kbd><kbd>tab</kbd><span>Bấm để chuyển</span></button>
           </div>
         </div>
       </div>
@@ -362,21 +425,26 @@
           <div class="art art--chart">
             <div class="card">
               <div class="card__head"><b>Hộp đen</b><span class="mono muted">Hôm nay, 14:00 – 15:00</span></div>
-              <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
-                <rect class="chart__hl" x="128" y="0" width="70" height="120"/>
-                <path class="chart__area" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95 L320 120 L0 120Z"/>
-                <path class="chart__line" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95"/>
-              </svg>
+              <div class="chart-wrap" data-chart>
+                <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+                  <rect class="chart__hl" x="128" y="0" width="70" height="120"/>
+                  <path class="chart__area" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95 L320 120 L0 120Z"/>
+                  <path class="chart__line" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95"/>
+                </svg>
+                <span class="chart__cross" data-chart-cross hidden></span>
+                <span class="chart__tip mono" data-chart-tip hidden></span>
+              </div>
               <div class="chart__axis mono"><span>14:00</span><span>14:20</span><span>14:40</span><span>15:00</span></div>
-              <div class="diag">
+              <div class="diag" data-diag>
                 <span class="dot dot--warn"></span>
                 <p><b>14:24 – 14:37, máy chậm vì Docker.</b> Tiến trình <span class="mono">com.docker.backend</span> dùng trung bình 186% CPU, áp lực bộ nhớ lên mức vàng. Trước và sau khoảng này máy bình thường.</p>
               </div>
               <div class="frozen">
-                <div class="frozen__row"><span class="app-dot" style="--h:30"></span><span>Slack</span><span class="chip">Đã đóng băng</span></div>
+                <div class="frozen__row"><span class="app-dot" style="--h:30"></span><span>Slack</span><button class="chip" type="button" data-thaw>Đã đóng băng</button></div>
                 <div class="frozen__row"><span class="app-dot" style="--h:220"></span><span>Zoom</span><span class="chip chip--ok">Đang họp, bỏ qua</span></div>
               </div>
             </div>
+            <p class="art__hint">Rê chuột lên biểu đồ để xem từng mốc.</p>
           </div>
         </div>
       </div>
@@ -398,17 +466,18 @@
         </div>
         <div class="feature__art">
           <div class="art art--versions">
-            <div class="card">
-              <div class="card__head"><b><svg class="ico"><use href="#i-doc"/></svg>bao-gia-Q4.xlsx</b><span class="chip">6 phiên bản</span></div>
-              <ol class="timeline">
-                <li class="is-on"><span class="mono">10:42</span><span>Bản hiện tại</span><span class="muted">48 KB</span></li>
-                <li><span class="mono">10:15</span><span>Trước khi bị ghi đè</span><button class="chip chip--accent" type="button" tabindex="-1">Khôi phục</button></li>
-                <li><span class="mono">09:30</span><span>Sửa bảng giá</span><span class="muted">47 KB</span></li>
-                <li><span class="mono">Hôm qua</span><span>Bản gửi khách</span><span class="muted">45 KB</span></li>
-              </ol>
-              <div class="diff mono">
-                <div class="diff__row diff__row--del">- Gói Pro · 1.200.000đ</div>
-                <div class="diff__row diff__row--add">+ Gói Pro · 990.000đ</div>
+            <div class="card" data-versions>
+              <div class="card__head"><b><svg class="ico"><use href="#i-doc"/></svg>bao-gia-Q4.xlsx</b><span class="chip">4 phiên bản</span></div>
+              <div class="timeline" role="listbox" aria-label="Phiên bản">
+                <button type="button" class="tl is-current" data-ver="0"><span class="mono">10:42</span><span>Bản hiện tại</span><span class="muted">48 KB</span></button>
+                <button type="button" class="tl is-sel" data-ver="1"><span class="mono">10:15</span><span>Trước khi bị ghi đè</span><span class="muted">47 KB</span></button>
+                <button type="button" class="tl" data-ver="2"><span class="mono">09:30</span><span>Sửa bảng giá</span><span class="muted">47 KB</span></button>
+                <button type="button" class="tl" data-ver="3"><span class="mono">Hôm qua</span><span>Bản gửi khách</span><span class="muted">45 KB</span></button>
+              </div>
+              <div class="diff mono" data-diff></div>
+              <div class="ver-actions">
+                <button class="btn btn--primary btn--sm" type="button" data-restore><span class="btn__icon"><svg class="ico"><use href="#i-rewind"/></svg></span><span class="btn__label">Khôi phục bản này</span></button>
+                <span class="muted small" data-ver-status>Xem trước rồi mới khôi phục.</span>
               </div>
             </div>
           </div>
@@ -417,7 +486,7 @@
     </section>
 
     <!-- SECURITY -->
-    <section class="section feature" id="bao-mat">
+    <section class="section feature theme-dark band" id="bao-mat">
       <div class="container feature__grid">
         <div class="feature__copy">
           <p class="eyebrow"><svg class="ico"><use href="#i-shield"/></svg>Bảo mật</p>
@@ -432,18 +501,21 @@
         </div>
         <div class="feature__art">
           <div class="art art--secret">
-            <div class="toast">
+            <div class="toast" data-secret>
               <span class="toast__icon"><svg class="ico"><use href="#i-key"/></svg></span>
               <div>
-                <b>Clipboard có khóa API</b>
-                <p>Có thể là khóa AWS. Sẽ tự xóa sau <span class="mono" id="secret-count">30</span> giây.</p>
-                <div class="toast__actions"><span class="chip chip--accent">Xóa ngay</span><span class="chip">Đánh dấu an toàn</span></div>
+                <b data-secret-title>Clipboard có khóa API</b>
+                <p data-secret-sub>Có thể là khóa AWS. Sẽ tự xóa sau <span class="mono" data-secret-count>30</span> giây.</p>
+                <div class="toast__actions" data-secret-actions>
+                  <button class="chip chip--accent" type="button" data-secret-clear>Xóa ngay</button>
+                  <button class="chip" type="button" data-secret-safe>Đánh dấu an toàn</button>
+                </div>
               </div>
             </div>
             <div class="card code-card">
-              <div class="card__head"><b class="mono">.env</b><span class="chip">Quick Look</span></div>
-              <pre class="mono"><span class="k">DATABASE_URL</span>=<span class="mask">••••••••••••••••••••</span>
-<span class="k">STRIPE_SECRET_KEY</span>=<span class="mask">••••••••••••••</span>
+              <div class="card__head"><b class="mono">.env</b><span class="chip">Quick Look, bấm để hiện</span></div>
+              <pre class="mono"><span class="k">DATABASE_URL</span>=<button type="button" class="mask" data-reveal="postgres://app:demo@localhost/app">••••••••••••••••••••</button>
+<span class="k">STRIPE_SECRET_KEY</span>=<button type="button" class="mask" data-reveal="sk_test_demo_51Hx…">••••••••••••••</button>
 <span class="k">APP_ENV</span>=<span class="v">production</span>
 <span class="k">PORT</span>=<span class="v">3000</span></pre>
             </div>
@@ -525,26 +597,26 @@
         </div>
         <div class="feature__art">
           <div class="art art--finder">
-            <div class="fwin">
+            <div class="fwin" data-finder>
               <div class="fwin__bar"><i></i><i></i><i></i><span>Ảnh sản phẩm</span></div>
               <div class="fwin__body">
                 <aside class="fwin__side"><span>Gần đây</span><span>Desktop</span><span class="is-on">Ảnh sản phẩm</span><span>Tải về</span><span>iCloud Drive</span></aside>
-                <div class="fwin__files">
-                  <span class="ftile is-on"><svg class="ico"><use href="#i-image"/></svg>ao-thun-01.heic</span>
-                  <span class="ftile is-on"><svg class="ico"><use href="#i-image"/></svg>ao-thun-02.heic</span>
+                <div class="fwin__files" data-finder-files>
+                  <span class="ftile is-on" data-file="ao-thun-01.heic"><svg class="ico"><use href="#i-image"/></svg>ao-thun-01.heic</span>
+                  <span class="ftile is-on" data-file="ao-thun-02.heic"><svg class="ico"><use href="#i-image"/></svg>ao-thun-02.heic</span>
                   <span class="ftile"><svg class="ico"><use href="#i-image"/></svg>banner.png</span>
                   <span class="ftile"><svg class="ico"><use href="#i-doc"/></svg>catalog.pdf</span>
                 </div>
-                <div class="ctx">
-                  <span>Mở</span><span>Chép tên</span><hr>
+                <div class="ctx" data-ctx role="menu">
+                  <span class="ctx__plain">Mở</span><span class="ctx__plain">Chép tên</span><hr>
                   <span class="ctx__head">DHbox</span>
-                  <span class="is-on"><svg class="ico"><use href="#i-flow"/></svg>Đổi sang JPEG, giữ màu</span>
-                  <span><svg class="ico"><use href="#i-cube"/></svg>Nén ảnh</span>
-                  <span><svg class="ico"><use href="#i-doc"/></svg>Lấy chữ trong ảnh</span>
-                  <span><svg class="ico"><use href="#i-lock"/></svg>Che vùng nhạy cảm</span>
-                  <span><svg class="ico"><use href="#i-rewind"/></svg>Khôi phục bản trước</span>
+                  <button type="button" role="menuitem" data-finder-act="jpeg"><svg class="ico"><use href="#i-flow"/></svg>Đổi sang JPEG, giữ màu</button>
+                  <button type="button" role="menuitem" data-finder-act="compress"><svg class="ico"><use href="#i-cube"/></svg>Nén ảnh</button>
+                  <button type="button" role="menuitem" data-finder-act="ocr"><svg class="ico"><use href="#i-doc"/></svg>Lấy chữ trong ảnh</button>
+                  <button type="button" role="menuitem" data-finder-act="redact"><svg class="ico"><use href="#i-lock"/></svg>Che vùng nhạy cảm</button>
                 </div>
               </div>
+              <div class="fwin__status" data-finder-status>2 mục được chọn. Bấm chuột phải để mở menu.</div>
             </div>
           </div>
         </div>
@@ -568,16 +640,20 @@
         </div>
         <div class="feature__art">
           <div class="art art--plan">
-            <div class="card">
+            <div class="card" data-plan>
               <div class="prompt"><svg class="ico"><use href="#i-bolt"/></svg><span>đổi tên ảnh theo ngày chụp rồi bỏ vào thư mục theo tháng</span></div>
-              <p class="plan__label">Xem trước, 4 trên 128 tệp</p>
+              <p class="plan__label" data-plan-label>Xem trước, 4 trên 128 tệp</p>
               <div class="plan">
-                <div class="plan__row"><span class="mono">IMG_2101.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.14.jpg</span></div>
-                <div class="plan__row"><span class="mono">IMG_2104.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.20.jpg</span></div>
-                <div class="plan__row"><span class="mono">IMG_2230.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.45.jpg</span></div>
-                <div class="plan__row"><span class="mono">IMG_2231.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.46.jpg</span></div>
+                <div class="plan__row" data-plan-row><span class="mono">IMG_2101.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.14.jpg</span></div>
+                <div class="plan__row" data-plan-row><span class="mono">IMG_2104.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.20.jpg</span></div>
+                <div class="plan__row" data-plan-row><span class="mono">IMG_2230.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.45.jpg</span></div>
+                <div class="plan__row" data-plan-row><span class="mono">IMG_2231.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.46.jpg</span></div>
               </div>
-              <div class="plan__actions"><span class="chip chip--accent">Chạy</span><span class="chip">Hủy</span><span class="muted small">Hoàn tác được</span></div>
+              <div class="plan__bar" data-plan-bar hidden><i></i></div>
+              <div class="plan__actions">
+                <button class="btn btn--primary btn--sm" type="button" data-plan-run><span class="btn__icon"><svg class="ico"><use href="#i-play"/></svg></span><span class="btn__label">Chạy</span></button>
+                <span class="muted small" data-plan-note>Hoàn tác được</span>
+              </div>
             </div>
           </div>
         </div>
@@ -603,12 +679,12 @@
             <div class="card">
               <div class="tray__tabs"><span>Tổng quan</span><span class="is-on">Âm thanh</span><span>Mạng</span><span>Ổ đĩa</span><span>Pin</span></div>
               <div class="mixer">
-                <div class="mixer__row"><span class="app-dot" style="--h:215"></span><span>Zoom</span><span class="slider"><i style="--v:.85"></i></span><span class="mono">85</span></div>
-                <div class="mixer__row"><span class="app-dot" style="--h:140"></span><span>Spotify</span><span class="slider"><i style="--v:.3"></i></span><span class="mono">30</span></div>
-                <div class="mixer__row"><span class="app-dot" style="--h:25"></span><span>Safari</span><span class="slider"><i style="--v:.6"></i></span><span class="mono">60</span></div>
-                <div class="mixer__row"><span class="app-dot" style="--h:280"></span><span>Music</span><span class="slider"><i style="--v:0"></i></span><span class="mono">Tắt</span></div>
+                <label class="mixer__row"><span class="app-dot" style="--h:215"></span><span>Zoom</span><input class="range" type="range" min="0" max="100" value="85" data-vol><b class="mono">85</b></label>
+                <label class="mixer__row"><span class="app-dot" style="--h:140"></span><span>Spotify</span><input class="range" type="range" min="0" max="100" value="30" data-vol><b class="mono">30</b></label>
+                <label class="mixer__row"><span class="app-dot" style="--h:25"></span><span>Safari</span><input class="range" type="range" min="0" max="100" value="60" data-vol><b class="mono">60</b></label>
+                <label class="mixer__row"><span class="app-dot" style="--h:280"></span><span>Music</span><input class="range" type="range" min="0" max="100" value="0" data-vol><b class="mono">Tắt</b></label>
               </div>
-              <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Đầu ra: AirPods Pro</span><span class="muted small">Đổi</span></div>
+              <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Đầu ra: AirPods Pro</span><span class="muted small">Kéo thanh trượt để thử</span></div>
             </div>
           </div>
         </div>
@@ -616,7 +692,7 @@
     </section>
 
     <!-- LIGHTWEIGHT -->
-    <section class="section light" id="nhe">
+    <section class="section theme-dark band" id="nhe">
       <div class="container">
         <header class="section__head section__head--center">
           <p class="eyebrow"><svg class="ico"><use href="#i-bolt"/></svg>Nhẹ là yêu cầu thiết kế</p>
@@ -780,7 +856,7 @@
     <!-- FINAL CTA -->
     <section class="section cta" id="tai-ve">
       <div class="container">
-        <div class="cta__box">
+        <div class="cta__box theme-dark">
           <img src="assets/img/dhbox-icon.png" alt="Biểu tượng DHbox" width="112" height="112" class="cta__icon">
           <h2>Sẵn sàng để Mac<br>làm được nhiều hơn?</h2>
           <p class="section__lead">Tải DHbox, dùng thử 7 ngày với đầy đủ tính năng.</p>
@@ -863,5 +939,6 @@
   <div class="toast-live" id="toast" role="status" aria-live="polite" hidden></div>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/demos.js" defer></script>
 </body>
 </html>

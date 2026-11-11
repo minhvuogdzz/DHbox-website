@@ -46,11 +46,8 @@
 
   // ---------- Theme ----------
   var root = document.documentElement;
-  var media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
-  function effectiveTheme() {
-    if (root.dataset.theme) return root.dataset.theme;
-    return media && media.matches ? 'light' : 'dark';
-  }
+  // Light is the default; dark only when the visitor picks it.
+  function effectiveTheme() { return root.dataset.theme === 'dark' ? 'dark' : 'light'; }
   var themeBtn = $('#theme-toggle');
   if (themeBtn) {
     themeBtn.addEventListener('click', function () {
@@ -328,36 +325,6 @@
   }
 
   // ---------- Small animations in the mockups ----------
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var secretCount = $('#secret-count');
-  if (secretCount && !reduceMotion) {
-    var n = 30;
-    setInterval(function () {
-      if (document.hidden) return;
-      n = n <= 1 ? 30 : n - 1;
-      secretCount.textContent = String(n);
-    }, 1000);
-  }
-
-  var typed = $('.typed');
-  if (typed && !reduceMotion) {
-    var phrases = typed.dataset.typed.split('|');
-    var p = 0, c = phrases[0].length, deleting = true;
-    var tick = function () {
-      var word = phrases[p];
-      if (deleting) {
-        c--;
-        if (c <= 0) { deleting = false; p = (p + 1) % phrases.length; }
-      } else {
-        c++;
-        if (c >= phrases[p].length) { deleting = true; typed.textContent = phrases[p]; return setTimeout(tick, 1800); }
-      }
-      typed.textContent = (deleting ? word : phrases[p]).slice(0, Math.max(c, 0));
-      setTimeout(tick, deleting ? 45 : 85);
-    };
-    setTimeout(tick, 2200);
-  }
-
   // ---------- Release info ----------
   function formatSize(bytes) {
     if (!bytes) return '';
