@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="vi" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DHbox — Mọi thứ macOS còn thiếu, gói gọn trong một chiếc hộp</title>
+  <meta name="description" content="DHbox là app tiện ích cho Mac chạy trên thanh menu: Soft Notch, xem trước cửa sổ, Hộp đen chẩn đoán máy chậm, tua lại tệp, cảnh báo secret, thư viện hành động và AI chạy ngay trên máy. Dùng thử 7 ngày, mua một lần dùng trọn đời.">
+  <meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F5F7FB" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DHbox — Mọi thứ macOS còn thiếu, gói gọn trong một chiếc hộp">
+  <meta property="og:description" content="Hơn 60 công cụ cho Mac, nhẹ CPU, xử lý trên máy. Dùng thử 7 ngày, mua một lần dùng trọn đời.">
+  <meta property="og:image" content="assets/img/og-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/dhbox-icon-256.png">
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try { var t = localStorage.getItem('dhbox-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- Icon set: line icons drawn in the SF Symbols spirit. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m0 0-5-5m5 5-5 5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+      <symbol id="i-notch" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8.5 4v1.5a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V4"/></symbol>
+      <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18"/><circle cx="6" cy="7" r=".4"/><circle cx="8" cy="7" r=".4"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h3.6l2 2.2h7.4A2.5 2.5 0 0 1 21 9.7v7.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="m12 13 4-4.5"/><circle cx="12" cy="13" r="1.2"/></symbol>
+      <symbol id="i-rewind" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.6"/><path d="M4 4v4.6h4.6M12 8v4.5l3 2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.3 3 7.8 7 9.5 4-1.7 7-5.2 7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+      <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="5" rx="1.5"/><rect x="14" y="15" width="7" height="5" rx="1.5"/><path d="M6.5 9v3.5a2 2 0 0 0 2 2h9V15"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+      <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="i-menubar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8h18M15 6h3"/><rect x="12" y="10" width="7" height="6" rx="1.2"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+      <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.5 3h7.5l4.5 4.5V19a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v4.5h4.5M8.5 13h7M8.5 16.5h5"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m3.5 17.5 5-5 4 4 2.5-2.5 5 5"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5M12.5 15h4.5"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16 7l2.5 2.5M14 9l2 2"/></symbol>
+      <symbol id="i-dock" viewBox="0 0 24 24"><rect x="2.5" y="15" width="19" height="5.5" rx="2"/><rect x="5" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="9" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="13" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="7" y="4" width="10" height="7.5" rx="1.5"/></symbol>
+      <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+      <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 8h11v6a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 9.5h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5v2M11 3.5v2"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#noi-dung">Bỏ qua thanh điều hướng</a>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="DHbox, về đầu trang">
+        <img src="assets/img/dhbox-icon-256.png" alt="" width="30" height="30">
+        <span>DHbox</span>
+      </a>
+      <nav class="nav__links" aria-label="Điều hướng chính">
+        <a href="#tinh-nang">Tính năng</a>
+        <a href="#hanh-dong">Bộ công cụ</a>
+        <a href="#tat-ca">Tất cả tính năng</a>
+        <a href="#gia">Giá</a>
+        <a href="#hoi-dap">Hỏi đáp</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Đổi giao diện sáng hoặc tối">
+          <svg class="ico ico--sun"><use href="#i-sun"/></svg>
+          <svg class="ico ico--moon"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn--primary btn--sm" href="#tai-ve" data-download>
+          <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span>
+          <span class="btn__label">Tải về</span>
+        </a>
+        <button class="icon-btn nav__burger" id="nav-burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="nav-sheet">
+          <svg class="ico"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__sheet" id="nav-sheet" hidden>
+      <a href="#tinh-nang">Tính năng</a>
+      <a href="#hanh-dong">Bộ công cụ</a>
+      <a href="#tat-ca">Tất cả tính năng</a>
+      <a href="#gia">Giá</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+    </div>
+  </header>
+
+  <main id="noi-dung">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <a class="pill-tag rise" style="--d:0ms" href="#tinh-nang">
+          <span class="dot dot--ok"></span>
+          <span>Mới: bảng Tổng quan trên thanh menu</span>
+          <span class="pill-tag__ver" data-release-version>1.4</span>
+        </a>
+        <h1 class="hero__title rise" style="--d:80ms">
+          Mọi thứ macOS còn thiếu,
+          <span class="grad">gói gọn trong một chiếc hộp.</span>
+        </h1>
+        <p class="hero__lead rise" style="--d:160ms">
+          Soft Notch ngay dưới tai thỏ, xem trước cửa sổ, Hộp đen giải thích vì sao máy chậm,
+          tua lại tệp đã ghi đè, cảnh báo lộ khóa API và hơn 60 công cụ cho dev, dân văn phòng, dân design.
+          Tất cả chạy trên máy, nhẹ đến mức bạn quên là nó đang chạy.
+        </p>
+        <div class="hero__cta rise" style="--d:240ms">
+          <a class="btn btn--primary btn--lg" href="#tai-ve" data-download>
+            <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span>
+            <span class="btn__label">Tải DHbox cho Mac</span>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#tinh-nang">Xem tính năng</a>
+        </div>
+        <ul class="hero__meta rise" style="--d:320ms" aria-label="Thông tin phiên bản">
+          <li>Dùng thử 7 ngày</li>
+          <li>Mua một lần 249.000đ</li>
+          <li>macOS 15 trở lên</li>
+          <li>Phiên bản <span data-release-version>1.4</span></li>
+        </ul>
+
+        <!-- Hero mockup: a Mac desktop with the Soft Notch open and the tray overview -->
+        <div class="screen rise" style="--d:400ms" aria-label="Minh họa DHbox trên màn hình Mac" role="img">
+          <div class="screen__display">
+            <div class="mbar">
+              <div class="mbar__left"><b>Finder</b><span>Tệp</span><span>Sửa</span><span>Xem</span><span>Đi</span><span>Cửa sổ</span></div>
+              <div class="mbar__notch"></div>
+              <div class="mbar__right">
+                <img class="mbar__tray" src="assets/img/favicon.png" alt="">
+                <span class="mono">78%</span><span>Th 4 11 thg 11&nbsp; 9:41</span>
+              </div>
+            </div>
+
+            <div class="snotch">
+              <div class="snotch__head"></div>
+              <div class="snotch__body">
+                <div class="snotch__row snotch__music">
+                  <div class="cover"></div>
+                  <div class="snotch__text"><b>Lofi cho buổi sáng</b><span>Spotify</span></div>
+                  <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                </div>
+                <div class="snotch__alert">
+                  <span class="dot dot--warn"></span>
+                  <div class="snotch__text"><b>Chrome Helper dùng 41% CPU</b><span>Không mở trong 25 phút</span></div>
+                  <span class="chip chip--accent">Đóng băng</span>
+                </div>
+                <div class="snotch__shelf">
+                  <span class="shelf-file"><svg class="ico"><use href="#i-doc"/></svg>bao-gia-Q4.pdf</span>
+                  <span class="shelf-file"><svg class="ico"><use href="#i-image"/></svg>logo@2x.png</span>
+                  <span class="shelf-file shelf-file--more">+3</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tray">
+              <div class="tray__tabs">
+                <span class="is-on">Tổng quan</span><span>Âm thanh</span><span>Mạng</span><span>Pin</span>
+              </div>
+              <div class="tray__grid">
+                <div class="metric"><span>CPU</span><b class="mono">12%</b><i style="--v:.12"></i></div>
+                <div class="metric"><span>Bộ nhớ</span><b class="mono">14,2 GB</b><i style="--v:.58"></i></div>
+                <div class="metric"><span>Áp lực</span><b><span class="dot dot--ok"></span> Bình thường</b></div>
+                <div class="metric"><span>Mạng</span><b class="mono">↓ 48 ↑ 6 Mb/s</b></div>
+              </div>
+              <div class="tray__row"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức</span><span class="switch is-on"></span></div>
+              <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Zoom</span><span class="slider"><i style="--v:.7"></i></span></div>
+              <div class="tray__foot"><span class="dot dot--ok"></span><span>DHbox dùng <b class="mono">0,2%</b> CPU</span></div>
+            </div>
+
+            <div class="desk-win">
+              <div class="desk-win__bar"><i></i><i></i><i></i><span>Tài liệu</span></div>
+              <div class="desk-win__body">
+                <span class="file-tile"><svg class="ico"><use href="#i-folder"/></svg>Dự án</span>
+                <span class="file-tile"><svg class="ico"><use href="#i-doc"/></svg>Hợp đồng.docx</span>
+                <span class="file-tile"><svg class="ico"><use href="#i-image"/></svg>banner.heic</span>
+                <span class="file-tile"><svg class="ico"><use href="#i-doc"/></svg>.env</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen__chin"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee of tools -->
+    <section class="strip" aria-label="Một số công cụ trong DHbox">
+      <p class="strip__label container">Những việc nhỏ làm mỗi ngày, <b>giờ chỉ cần một cú bấm.</b></p>
+      <div class="marquee" id="marquee"><div class="marquee__track" id="marquee-track"></div></div>
+    </section>
+
+    <!-- FEATURE OVERVIEW -->
+    <section class="section" id="tinh-nang">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Một app, đủ mọi việc</p>
+          <h2>Cắm thêm sức mạnh vào macOS,<br><span class="muted">không đụng vào giao diện gốc.</span></h2>
+          <p class="section__lead">DHbox chỉ dùng các cổng mở rộng chính thức của macOS và một Soft Notch riêng. Finder, Dock và thanh menu vẫn là của bạn, chỉ làm được nhiều hơn.</p>
+        </header>
+        <div class="bento">
+          <a class="bento__item bento__item--wide" href="#soft-notch">
+            <svg class="ico ico--lg"><use href="#i-notch"/></svg>
+            <h3>Soft Notch</h3>
+            <p>Phần mở rộng ngay dưới tai thỏ: nhạc đang phát, cảnh báo, kệ kéo thả, lịch sử clipboard, ô lệnh gõ không dấu.</p>
+          </a>
+          <a class="bento__item" href="#cua-so">
+            <svg class="ico ico--lg"><use href="#i-window"/></svg>
+            <h3>Cửa sổ và Dock</h3>
+            <p>Xem trước cửa sổ trên Dock, Command Tab có ảnh, bấm Dock để thu nhỏ.</p>
+          </a>
+          <a class="bento__item" href="#may-muot">
+            <svg class="ico ico--lg"><use href="#i-gauge"/></svg>
+            <h3>Giữ máy mượt</h3>
+            <p>Hộp đen trả lời “vì sao chậm”, đóng băng app nền, xem tiến trình chiếm cổng.</p>
+          </a>
+          <a class="bento__item" href="#du-lieu">
+            <svg class="ico ico--lg"><use href="#i-rewind"/></svg>
+            <h3>Không mất dữ liệu</h3>
+            <p>Tua lại tệp bị ghi đè hay xóa nhầm, ảnh chụp cấu hình máy để so sánh sau cập nhật.</p>
+          </a>
+          <a class="bento__item" href="#bao-mat">
+            <svg class="ico ico--lg"><use href="#i-shield"/></svg>
+            <h3>Bảo mật</h3>
+            <p>Cảnh báo khóa API và mật khẩu trong clipboard, tệp .env và lịch sử shell.</p>
+          </a>
+          <a class="bento__item" href="#hanh-dong">
+            <svg class="ico ico--lg"><use href="#i-bolt"/></svg>
+            <h3>Thư viện hành động</h3>
+            <p>JWT, JSON sang Swift, bỏ dấu, sửa Telex, OCR, bảng màu, nén ảnh, gộp PDF.</p>
+          </a>
+          <a class="bento__item" href="#finder">
+            <svg class="ico ico--lg"><use href="#i-folder"/></svg>
+            <h3>Finder</h3>
+            <p>Menu chuột phải, Quick Look cho .env và log, cắt dán tệp, DHbox Search.</p>
+          </a>
+          <a class="bento__item" href="#thanh-menu">
+            <svg class="ico ico--lg"><use href="#i-menubar"/></svg>
+            <h3>Thanh menu</h3>
+            <p>Tổng quan máy, giữ máy thức, âm lượng từng app, mạng, ổ đĩa, pin.</p>
+          </a>
+          <a class="bento__item" href="#nhe">
+            <svg class="ico ico--lg"><use href="#i-lock"/></svg>
+            <h3>Nhẹ và riêng tư</h3>
+            <p>Native Swift, chạy theo sự kiện, xử lý trên máy, dữ liệu mã hóa.</p>
+          </a>
+          <a class="bento__item bento__item--wide" href="#ai">
+            <svg class="ico ico--lg"><use href="#i-chip"/></svg>
+            <h3>AI và tự động hóa, ngay trên máy</h3>
+            <p>Tìm tệp theo nội dung, tạo thao tác trên tệp bằng lời có xem trước và hoàn tác, quy tắc Sự kiện, Điều kiện, Hành động.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOFT NOTCH -->
+    <section class="section feature" id="soft-notch">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-notch"/></svg>Soft Notch</p>
+          <h2>Tai thỏ biết làm việc.</h2>
+          <p class="section__lead">Rê chuột lên mép trên màn hình, Soft Notch mở ra ngay dưới tai thỏ. Máy không có tai thỏ hay màn hình ngoài thì DHbox dựng một notch ảo ở giữa mép trên.</p>
+          <ul class="ticks">
+            <li><b>Nhạc đang phát</b> từ Music, Spotify hay trình duyệt, có ảnh bìa và kéo để tua.</li>
+            <li><b>Kệ kéo thả</b> giữ tệp tạm trong lúc chuyển thư mục, nhấn Space để xem nhanh, chia sẻ một chạm.</li>
+            <li><b>Lịch sử clipboard</b> 30 phút gần nhất, secret được che.</li>
+            <li><b>Ô lệnh</b> <kbd>⌃</kbd><kbd>⌥</kbd><kbd>N</kbd>: gõ “giu may thuc” hay “dong bang” không cần dấu.</li>
+            <li>Tự ẩn khi xem phim toàn màn hình, trình chiếu hay chia sẻ màn hình.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--notch">
+            <div class="art-notch">
+              <div class="art-notch__head"></div>
+              <div class="art-notch__panel">
+                <div class="palette">
+                  <div class="palette__input"><svg class="ico"><use href="#i-search"/></svg><span class="typed" data-typed="giu may thuc|dong bang chrome|bo dau|xem cong 3000">giu may thuc</span><i class="caret"></i></div>
+                  <div class="palette__item is-on"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức 1 giờ</span><kbd>↩</kbd></div>
+                  <div class="palette__item"><svg class="ico"><use href="#i-cup"/></svg><span>Giữ máy thức đến khi tắt</span></div>
+                  <div class="palette__item"><svg class="ico"><use href="#i-clock"/></svg><span>Hẹn giờ 25 phút</span></div>
+                </div>
+                <div class="clip">
+                  <p class="clip__label">Clipboard</p>
+                  <div class="clip__row"><span class="mono">npm run dev -- --port 3000</span><span>2 phút</span></div>
+                  <div class="clip__row clip__row--secret"><span class="mono">sk-•••••••••••••••••</span><span class="chip chip--warn">Secret, tự xóa</span></div>
+                  <div class="clip__row"><span>Gửi chị Lan bản báo giá mới nhé</span><span>8 phút</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WINDOWS & DOCK -->
+    <section class="section feature feature--flip" id="cua-so">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-window"/></svg>Cửa sổ và Dock</p>
+          <h2>Nhiều cửa sổ?<br>Nhìn trước rồi hãy chọn.</h2>
+          <p class="section__lead">Rê chuột lên một icon trên Dock để thấy ảnh từng cửa sổ của app đó. Bấm ảnh nào, cửa sổ đó lên trước. Có cả nút đóng ngay trên ảnh.</p>
+          <ul class="ticks">
+            <li><b>Command Tab theo cửa sổ</b>, có ảnh xem trước. Bấm nhanh vẫn về cửa sổ trước như cũ.</li>
+            <li><b>Bấm icon Dock để thu nhỏ</b> app đang mở, như trên Windows.</li>
+            <li><b>Tìm cửa sổ</b> theo tên và <b>phóng to cửa sổ</b> vừa khít màn hình.</li>
+            <li><b>Hồ sơ Dock</b> cho lúc code, họp, trình chiếu; luôn có nút khôi phục Dock như cũ.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--dock">
+            <div class="dockprev">
+              <div class="dockprev__thumbs">
+                <div class="thumb"><div class="thumb__win"><i></i><i></i><i></i></div><span>Bảng giá 2026</span></div>
+                <div class="thumb is-on"><div class="thumb__win thumb__win--b"><i></i><i></i><i></i></div><span>Kế hoạch Q4</span></div>
+                <div class="thumb"><div class="thumb__win thumb__win--c"><i></i><i></i><i></i></div><span>Hóa đơn tháng 11</span></div>
+              </div>
+              <div class="dockbar">
+                <span class="dock-ic" style="--h:200"></span>
+                <span class="dock-ic" style="--h:150"></span>
+                <span class="dock-ic is-on" style="--h:215"></span>
+                <span class="dock-ic" style="--h:260"></span>
+                <span class="dock-ic" style="--h:20"></span>
+                <span class="dock-ic" style="--h:330"></span>
+              </div>
+            </div>
+            <div class="cmdtab">
+              <kbd>⌘</kbd><kbd>tab</kbd>
+              <div class="cmdtab__list"><i></i><i class="is-on"></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEEP THE MAC SMOOTH -->
+    <section class="section feature" id="may-muot">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-gauge"/></svg>Giữ máy mượt</p>
+          <h2>Máy vừa lag?<br>DHbox biết vì sao.</h2>
+          <p class="section__lead">Hộp đen ghi lại sức khỏe máy theo thời gian: CPU, bộ nhớ, áp lực bộ nhớ, nhiệt, pin, ổ đĩa và tiến trình nặng nhất. Hỏi “vừa nãy sao máy chậm”, DHbox trả lời bằng tiếng Việt kèm mốc thời gian làm bằng chứng.</p>
+          <ul class="ticks">
+            <li><b>Đóng băng app nền</b> không dùng lâu, mở lại là chạy tiếp. Không đụng app đang phát nhạc, đang họp hay đang tải.</li>
+            <li><b>Hạ ưu tiên</b> tiến trình nền gây chậm để thao tác của bạn luôn mượt.</li>
+            <li><b>Cổng và tiến trình</b>: xem ai đang chiếm cổng 3000, thoát lịch sự trước khi buộc dừng.</li>
+            <li>Cảnh báo sớm như “ổ đầy trong khoảng 6 ngày”, chỉ ra thư mục thủ phạm.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--chart">
+            <div class="card">
+              <div class="card__head"><b>Hộp đen</b><span class="mono muted">Hôm nay, 14:00 – 15:00</span></div>
+              <svg class="chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="chart__hl" x="128" y="0" width="70" height="120"/>
+                <path class="chart__area" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95 L320 120 L0 120Z"/>
+                <path class="chart__line" d="M0 98 L20 95 L40 97 L60 92 L80 94 L100 90 L120 88 L135 40 L150 28 L165 34 L180 30 L195 46 L210 86 L230 90 L250 92 L270 89 L290 93 L320 95"/>
+              </svg>
+              <div class="chart__axis mono"><span>14:00</span><span>14:20</span><span>14:40</span><span>15:00</span></div>
+              <div class="diag">
+                <span class="dot dot--warn"></span>
+                <p><b>14:24 – 14:37, máy chậm vì Docker.</b> Tiến trình <span class="mono">com.docker.backend</span> dùng trung bình 186% CPU, áp lực bộ nhớ lên mức vàng. Trước và sau khoảng này máy bình thường.</p>
+              </div>
+              <div class="frozen">
+                <div class="frozen__row"><span class="app-dot" style="--h:30"></span><span>Slack</span><span class="chip">Đã đóng băng</span></div>
+                <div class="frozen__row"><span class="app-dot" style="--h:220"></span><span>Zoom</span><span class="chip chip--ok">Đang họp, bỏ qua</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA SAFETY -->
+    <section class="section feature feature--flip" id="du-lieu">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-rewind"/></svg>Không mất dữ liệu</p>
+          <h2>Lỡ tay ghi đè?<br>Tua lại là xong.</h2>
+          <p class="section__lead">Tua lại tệp theo dõi thư mục bạn chọn. Tệp bị sửa, ghi đè hay xóa đều có bản trước để khôi phục, kể cả khi app đã sửa nó không có nút hoàn tác.</p>
+          <ul class="ticks">
+            <li>Dùng bản sao APFS nên gần như không tốn thêm dung lượng lúc mới chụp.</li>
+            <li>Luôn xem trước rồi mới khôi phục, không ghi đè mù.</li>
+            <li><b>Ảnh chụp cấu hình</b>: Login Items, dotfiles, Homebrew, npm, Xcode. So sánh trước và sau khi cập nhật macOS, khôi phục từng mục.</li>
+            <li>Không lưu khóa riêng SSH, ảnh chụp được quét secret và mã hóa.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--versions">
+            <div class="card">
+              <div class="card__head"><b><svg class="ico"><use href="#i-doc"/></svg>bao-gia-Q4.xlsx</b><span class="chip">6 phiên bản</span></div>
+              <ol class="timeline">
+                <li class="is-on"><span class="mono">10:42</span><span>Bản hiện tại</span><span class="muted">48 KB</span></li>
+                <li><span class="mono">10:15</span><span>Trước khi bị ghi đè</span><button class="chip chip--accent" type="button" tabindex="-1">Khôi phục</button></li>
+                <li><span class="mono">09:30</span><span>Sửa bảng giá</span><span class="muted">47 KB</span></li>
+                <li><span class="mono">Hôm qua</span><span>Bản gửi khách</span><span class="muted">45 KB</span></li>
+              </ol>
+              <div class="diff mono">
+                <div class="diff__row diff__row--del">- Gói Pro · 1.200.000đ</div>
+                <div class="diff__row diff__row--add">+ Gói Pro · 990.000đ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITY -->
+    <section class="section feature" id="bao-mat">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-shield"/></svg>Bảo mật</p>
+          <h2>Lộ khóa API trước khi kịp dán.</h2>
+          <p class="section__lead">Bảo vệ secret nhận ra token, khóa API, khóa riêng trong clipboard, tệp .env, lịch sử shell và repo git. Clipboard chứa secret sẽ tự xóa sau vài giây.</p>
+          <ul class="ticks">
+            <li>Cảnh báo không bao giờ hiện lại chính nội dung secret.</li>
+            <li>DHbox chỉ lưu dấu vân tay để nhận ra lại, không lưu nguyên văn.</li>
+            <li><b>Quick Look .env</b> che giá trị, bấm mới hiện.</li>
+            <li><b>Radar quyền riêng tư</b> (thử nghiệm): app nào đang dùng camera, micro, tự thêm mục khởi động.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--secret">
+            <div class="toast">
+              <span class="toast__icon"><svg class="ico"><use href="#i-key"/></svg></span>
+              <div>
+                <b>Clipboard có khóa API</b>
+                <p>Có thể là khóa AWS. Sẽ tự xóa sau <span class="mono" id="secret-count">30</span> giây.</p>
+                <div class="toast__actions"><span class="chip chip--accent">Xóa ngay</span><span class="chip">Đánh dấu an toàn</span></div>
+              </div>
+            </div>
+            <div class="card code-card">
+              <div class="card__head"><b class="mono">.env</b><span class="chip">Quick Look</span></div>
+              <pre class="mono"><span class="k">DATABASE_URL</span>=<span class="mask">••••••••••••••••••••</span>
+<span class="k">STRIPE_SECRET_KEY</span>=<span class="mask">••••••••••••••</span>
+<span class="k">APP_ENV</span>=<span class="v">production</span>
+<span class="k">PORT</span>=<span class="v">3000</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION LIBRARY -->
+    <section class="section" id="hanh-dong">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow"><svg class="ico"><use href="#i-bolt"/></svg>Thư viện hành động</p>
+          <h2>Chọn thứ cần xử lý.<br><span class="muted">DHbox gợi ý việc đúng.</span></h2>
+          <p class="section__lead">Copy một đoạn lỗi, một ảnh hay chọn vài tệp, DHbox nhận ra loại dữ liệu và đưa đúng hành động. Mỗi hành động có xem trước, luôn xuất ra tệp mới, tệp gốc giữ nguyên.</p>
+        </header>
+
+        <div class="tabs" role="tablist" aria-label="Nhóm hành động">
+          <button role="tab" class="tab is-on" aria-selected="true" data-tab="dev">Dev</button>
+          <button role="tab" class="tab" aria-selected="false" data-tab="office">Văn phòng</button>
+          <button role="tab" class="tab" aria-selected="false" data-tab="design">Design</button>
+        </div>
+
+        <div class="actions-wrap">
+          <div class="action-panels">
+            <div class="action-panel is-on" data-panel="dev" role="tabpanel">
+              <div class="act"><svg class="ico"><use href="#i-key"/></svg><b>Giải mã JWT</b><span>Header và payload dễ đọc, kèm hạn dùng.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-terminal"/></svg><b>JSON sang Swift Codable</b><span>Dán JSON, nhận struct đặt tên sẵn.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-doc"/></svg><b>Định dạng JSON</b><span>Làm đẹp và kiểm tra JSON lỗi ở đâu.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-flow"/></svg><b>Base64, URL encode</b><span>Mã hóa và giải mã hai chiều.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-clock"/></svg><b>Đổi timestamp</b><span>Unix sang giờ UTC và giờ máy.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-cube"/></svg><b>Dọn rác dev</b><span>DerivedData, node_modules cũ, cache Homebrew, pip, Yarn.</span></div>
+            </div>
+            <div class="action-panel" data-panel="office" role="tabpanel" hidden>
+              <div class="act"><svg class="ico"><use href="#i-doc"/></svg><b>Bỏ dấu tiếng Việt</b><span>Đặt tên tệp, gửi SMS, nhập liệu.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-key"/></svg><b>Sửa lỗi gõ Telex</b><span>“Vieejt Nam” thành “Việt Nam”.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-image"/></svg><b>OCR ảnh và PDF</b><span>Lấy chữ tiếng Việt từ ảnh chụp, bản scan.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-doc"/></svg><b>Gộp, tách, xoay, nén PDF</b><span>Chọn trang cần lấy, giảm dung lượng gửi mail.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-phone"/></svg><b>Chuẩn hóa số điện thoại, ngày</b><span>Đưa danh sách lộn xộn về một định dạng.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-folder"/></svg><b>Tìm tệp trùng, tệp to lâu không mở</b><span>Chuyển vào Thùng rác, lấy lại được.</span></div>
+            </div>
+            <div class="action-panel" data-panel="design" role="tabpanel" hidden>
+              <div class="act"><svg class="ico"><use href="#i-image"/></svg><b>Bảng màu từ ảnh</b><span>Mã HEX và HSL của các màu chính.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-check"/></svg><b>Tương phản WCAG</b><span>Kiểm tra cặp chữ và nền đạt AA, AAA.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-cube"/></svg><b>Xóa nền</b><span>Tách chủ thể bằng Vision, chạy trên máy.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-flow"/></svg><b>Đổi PNG, JPEG, HEIC, TIFF</b><span>Giữ nguyên color profile sRGB hay Display P3.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-window"/></svg><b>Đổi kích thước theo mẫu</b><span>Ảnh chia sẻ, icon app và các cỡ thường dùng.</span></div>
+              <div class="act"><svg class="ico"><use href="#i-lock"/></svg><b>Che vùng nhạy cảm</b><span>Làm mờ thông tin trước khi gửi ảnh.</span></div>
+            </div>
+          </div>
+
+          <div class="demo card">
+            <div class="card__head"><b>Thử ngay: bỏ dấu</b><span class="chip">Chạy trên trình duyệt</span></div>
+            <label class="demo__label" for="demo-in">Gõ một câu có dấu</label>
+            <input class="demo__input" id="demo-in" type="text" value="Báo cáo doanh thu tháng 11" autocomplete="off" spellcheck="false">
+            <div class="demo__out">
+              <span class="muted">Kết quả</span>
+              <output class="mono" id="demo-out" for="demo-in">Bao cao doanh thu thang 11</output>
+            </div>
+            <p class="demo__hint">Trong DHbox, chọn đoạn chữ ở bất kỳ app nào rồi mở ô lệnh, gõ “bo dau”.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINDER -->
+    <section class="section feature feature--flip" id="finder">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-folder"/></svg>Finder</p>
+          <h2>Finder vẫn là Finder.<br>Chỉ là bấm chuột phải ra nhiều hơn.</h2>
+          <p class="section__lead">DHbox thêm mục vào menu chuột phải, Quick Look và thanh công cụ của Finder qua extension chính thức của Apple. Menu chỉ hiện hành động hợp với loại tệp bạn chọn.</p>
+          <ul class="ticks">
+            <li><b>Cắt và dán tệp</b> bằng <kbd>⌘</kbd><kbd>X</kbd> rồi <kbd>⌘</kbd><kbd>V</kbd>, tùy chọn phím kiểu Windows.</li>
+            <li><b>DHbox Search</b> tìm tệp theo tên khắp máy, cả trong Google Drive, iCloud.</li>
+            <li><b>Quick Look</b> cho .env, log, JSON có tô màu.</li>
+            <li>Thao tác hàng loạt luôn có xem trước, hoàn tác và vào Thùng rác thay vì xóa hẳn.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--finder">
+            <div class="fwin">
+              <div class="fwin__bar"><i></i><i></i><i></i><span>Ảnh sản phẩm</span></div>
+              <div class="fwin__body">
+                <aside class="fwin__side"><span>Gần đây</span><span>Desktop</span><span class="is-on">Ảnh sản phẩm</span><span>Tải về</span><span>iCloud Drive</span></aside>
+                <div class="fwin__files">
+                  <span class="ftile is-on"><svg class="ico"><use href="#i-image"/></svg>ao-thun-01.heic</span>
+                  <span class="ftile is-on"><svg class="ico"><use href="#i-image"/></svg>ao-thun-02.heic</span>
+                  <span class="ftile"><svg class="ico"><use href="#i-image"/></svg>banner.png</span>
+                  <span class="ftile"><svg class="ico"><use href="#i-doc"/></svg>catalog.pdf</span>
+                </div>
+                <div class="ctx">
+                  <span>Mở</span><span>Chép tên</span><hr>
+                  <span class="ctx__head">DHbox</span>
+                  <span class="is-on"><svg class="ico"><use href="#i-flow"/></svg>Đổi sang JPEG, giữ màu</span>
+                  <span><svg class="ico"><use href="#i-cube"/></svg>Nén ảnh</span>
+                  <span><svg class="ico"><use href="#i-doc"/></svg>Lấy chữ trong ảnh</span>
+                  <span><svg class="ico"><use href="#i-lock"/></svg>Che vùng nhạy cảm</span>
+                  <span><svg class="ico"><use href="#i-rewind"/></svg>Khôi phục bản trước</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI & AUTOMATION -->
+    <section class="section feature" id="ai">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-chip"/></svg>AI và tự động hóa</p>
+          <h2>Nói việc cần làm.<br>Xem trước. Rồi mới chạy.</h2>
+          <p class="section__lead">Gõ “đổi tên ảnh theo ngày chụp rồi bỏ vào thư mục theo tháng”, DHbox lập kế hoạch, cho bạn xem trước từng tệp sẽ đổi ra sao. Bấm chạy, không ưng thì hoàn tác.</p>
+          <ul class="ticks">
+            <li><b>Tìm theo nội dung</b>, không cần dấu: “bảng giá khách gửi tháng trước”.</li>
+            <li><b>Quy tắc tự động</b>: cắm màn hình ngoài, đổi Wi-Fi, pin dưới 20%, mở app, tệp mới xuất hiện.</li>
+            <li><b>Máy chủ AI cục bộ</b> tương thích OpenAI cho công cụ dev, chỉ nghe 127.0.0.1, có token.</li>
+            <li>Mặc định xử lý trên máy. Nội dung của bạn không rời khỏi Mac nếu bạn không bật.</li>
+            <li>App Intents: mọi hành động có trong Phím tắt, Spotlight và Control Center.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--plan">
+            <div class="card">
+              <div class="prompt"><svg class="ico"><use href="#i-bolt"/></svg><span>đổi tên ảnh theo ngày chụp rồi bỏ vào thư mục theo tháng</span></div>
+              <p class="plan__label">Xem trước, 4 trên 128 tệp</p>
+              <div class="plan">
+                <div class="plan__row"><span class="mono">IMG_2101.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.14.jpg</span></div>
+                <div class="plan__row"><span class="mono">IMG_2104.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-10/2026-10-21 09.20.jpg</span></div>
+                <div class="plan__row"><span class="mono">IMG_2230.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.45.jpg</span></div>
+                <div class="plan__row"><span class="mono">IMG_2231.jpg</span><svg class="ico"><use href="#i-arrow"/></svg><span class="mono">2026-11/2026-11-02 17.46.jpg</span></div>
+              </div>
+              <div class="plan__actions"><span class="chip chip--accent">Chạy</span><span class="chip">Hủy</span><span class="muted small">Hoàn tác được</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU BAR OVERVIEW -->
+    <section class="section feature feature--flip" id="thanh-menu">
+      <div class="container feature__grid">
+        <div class="feature__copy">
+          <p class="eyebrow"><svg class="ico"><use href="#i-menubar"/></svg>Thanh menu</p>
+          <h2>Một icon trên thanh menu.<br>Cả bảng điều khiển bên trong.</h2>
+          <p class="section__lead">Bấm icon DHbox để xem tổng quan máy: CPU từng nhân, bộ nhớ, mạng, ổ đĩa, pin. Ngay đó là các công tắc hay dùng.</p>
+          <ul class="ticks">
+            <li><b>Giữ máy thức</b> theo giờ, đến khi tắt, hoặc cả khi gập máy.</li>
+            <li><b>Âm lượng từng app</b>: Zoom to, Spotify nhỏ, chọn đầu ra riêng.</li>
+            <li><b>Đo tốc độ mạng</b>, tháo ổ ngoài, sức khỏe và nhiệt độ pin.</li>
+            <li>Hiện luôn <b>tài nguyên DHbox đang dùng</b>. App giám sát mà hao pin thì không đáng tin.</li>
+          </ul>
+        </div>
+        <div class="feature__art">
+          <div class="art art--mixer">
+            <div class="card">
+              <div class="tray__tabs"><span>Tổng quan</span><span class="is-on">Âm thanh</span><span>Mạng</span><span>Ổ đĩa</span><span>Pin</span></div>
+              <div class="mixer">
+                <div class="mixer__row"><span class="app-dot" style="--h:215"></span><span>Zoom</span><span class="slider"><i style="--v:.85"></i></span><span class="mono">85</span></div>
+                <div class="mixer__row"><span class="app-dot" style="--h:140"></span><span>Spotify</span><span class="slider"><i style="--v:.3"></i></span><span class="mono">30</span></div>
+                <div class="mixer__row"><span class="app-dot" style="--h:25"></span><span>Safari</span><span class="slider"><i style="--v:.6"></i></span><span class="mono">60</span></div>
+                <div class="mixer__row"><span class="app-dot" style="--h:280"></span><span>Music</span><span class="slider"><i style="--v:0"></i></span><span class="mono">Tắt</span></div>
+              </div>
+              <div class="tray__row"><svg class="ico"><use href="#i-speaker"/></svg><span>Đầu ra: AirPods Pro</span><span class="muted small">Đổi</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTWEIGHT -->
+    <section class="section light" id="nhe">
+      <div class="container">
+        <header class="section__head section__head--center">
+          <p class="eyebrow"><svg class="ico"><use href="#i-bolt"/></svg>Nhẹ là yêu cầu thiết kế</p>
+          <h2>Nhiều việc. Không nặng máy.</h2>
+          <p class="section__lead">DHbox chạy theo sự kiện của hệ thống thay vì liên tục kiểm tra. Khi bạn không dùng, nó gần như ngủ. Thu gọn Soft Notch là không còn hoạt ảnh, không còn hẹn giờ.</p>
+        </header>
+        <div class="stats">
+          <div class="stat"><b>&lt; 0,5%</b><span>mục tiêu CPU khi rảnh, tính trên một nhân</span></div>
+          <div class="stat"><b>~4 MB</b><span>bộ nhớ của tiến trình nền</span></div>
+          <div class="stat"><b>0</b><span>dữ liệu gửi ra ngoài theo mặc định</span></div>
+          <div class="stat"><b>100%</b><span>native Swift, không Electron, không web view</span></div>
+        </div>
+        <div class="principles">
+          <div><svg class="ico"><use href="#i-lock"/></svg><b>Xin quyền đúng lúc</b><span>Chỉ hỏi khi bạn bật tính năng cần quyền đó, có giải thích vì sao.</span></div>
+          <div><svg class="ico"><use href="#i-rewind"/></svg><b>Việc rủi ro có hoàn tác</b><span>Xem trước, xác nhận, vào Thùng rác. Không tự chạy lệnh phá hủy.</span></div>
+          <div><svg class="ico"><use href="#i-shield"/></svg><b>Dữ liệu mã hóa trên máy</b><span>Khóa giữ trong Keychain, có nút xóa sạch mọi dữ liệu.</span></div>
+          <div><svg class="ico"><use href="#i-x"/></svg><b>Công tắc dừng khẩn cấp</b><span>Tắt toàn bộ tính năng ngay từ thanh menu và Soft Notch.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALL FEATURES -->
+    <section class="section" id="tat-ca">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">Danh sách đầy đủ</p>
+          <h2>Tất cả tính năng.</h2>
+          <p class="section__lead">Mọi thứ DHbox làm được, gom theo nhóm. Gõ để tìm, không cần dấu.</p>
+        </header>
+        <div class="flist__tools">
+          <div class="search">
+            <svg class="ico"><use href="#i-search"/></svg>
+            <input id="feature-search" type="search" placeholder="Tìm tính năng, ví dụ “dong bang”" aria-label="Tìm tính năng" autocomplete="off">
+          </div>
+          <div class="chips" id="feature-filters" role="group" aria-label="Lọc theo nhóm"></div>
+        </div>
+        <div class="flist" id="feature-list" aria-live="polite"></div>
+        <div class="flist__more"><button class="btn btn--ghost" id="feature-more" type="button" hidden><span class="btn__label">Xem tất cả tính năng</span><span class="btn__icon"><svg class="ico"><use href="#i-chevron"/></svg></span></button></div>
+        <p class="flist__empty" id="feature-empty" hidden>Không có tính năng nào khớp. Thử từ khác, ví dụ “pdf” hay “cua so”.</p>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="gia">
+      <div class="container">
+        <header class="section__head section__head--center">
+          <p class="eyebrow">Giá</p>
+          <h2>Dùng thử 7 ngày.<br><span class="muted">Mua một lần, dùng trọn đời.</span></h2>
+          <p class="section__lead">Mọi tính năng đều mở trong thời gian dùng thử. Thấy hợp thì mua ngay trong app bằng VietQR, mã kích hoạt gửi về email.</p>
+        </header>
+        <div class="pricing">
+          <article class="plan-card">
+            <h3>Dùng thử</h3>
+            <p class="price"><b>0đ</b><span>/ 7 ngày</span></p>
+            <p class="plan-card__desc">Đủ thời gian để thử mọi thứ trên máy của bạn.</p>
+            <ul class="ticks ticks--compact">
+              <li>Mở đầy đủ mọi tính năng</li>
+              <li>Không cần thẻ, không cần tài khoản</li>
+              <li>Giao diện tiếng Việt và tiếng Anh</li>
+              <li>Hết hạn thì dữ liệu của bạn vẫn còn nguyên</li>
+            </ul>
+            <a class="btn btn--ghost btn--block" href="#tai-ve" data-download>
+              <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span>
+              <span class="btn__label">Tải miễn phí</span>
+            </a>
+          </article>
+          <article class="plan-card plan-card--pro">
+            <span class="plan-card__badge">Phổ biến</span>
+            <h3>DHbox trọn đời</h3>
+            <p class="price"><b>249.000đ</b><span>/ trọn đời</span></p>
+            <p class="plan-card__desc">Mọi tính năng, không giới hạn thời gian, không thuê bao.</p>
+            <ul class="ticks ticks--compact">
+              <li><b>Dùng trên 2 máy Mac</b>, gỡ máy cũ để chuyển sang máy mới</li>
+              <li><b>Trả một lần</b>, không phí hằng tháng</li>
+              <li><b>Cập nhật tự động</b>, bản mới có chữ ký số được kiểm tra</li>
+              <li><b>Thanh toán VietQR</b> trong app, kích hoạt ngay khi tiền về</li>
+              <li><b>Lấy lại mã</b> qua email khi cài lại máy</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#tai-ve" data-download>
+              <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span>
+              <span class="btn__label">Tải và mua trong app</span>
+            </a>
+          </article>
+          <article class="plan-card">
+            <h3>Doanh nghiệp</h3>
+            <p class="price"><b>Liên hệ</b></p>
+            <p class="plan-card__desc">Cho nhóm, công ty cần nhiều máy hoặc xuất hóa đơn.</p>
+            <ul class="ticks ticks--compact">
+              <li>Giá theo số lượng máy</li>
+              <li>Hợp đồng, hóa đơn theo yêu cầu</li>
+              <li>Hỗ trợ cài đặt cho cả nhóm</li>
+              <li>Ưu tiên hỗ trợ qua Zalo</li>
+            </ul>
+            <a class="btn btn--ghost btn--block" href="mailto:devhousesoftware.inc@gmail.com?subject=DHbox%20cho%20doanh%20nghi%E1%BB%87p">
+              <span class="btn__icon"><svg class="ico"><use href="#i-mail"/></svg></span>
+              <span class="btn__label">Gửi yêu cầu</span>
+            </a>
+          </article>
+        </div>
+        <ul class="pricing__notes">
+          <li><svg class="ico"><use href="#i-check"/></svg>Không thuê bao</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>2 máy Mac mỗi mã</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Chuyển máy được</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>macOS 15 trở lên</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="hoi-dap">
+      <div class="container container--narrow">
+        <header class="section__head section__head--center">
+          <p class="eyebrow">Hỏi đáp</p>
+          <h2>Trước khi bắt đầu.</h2>
+        </header>
+        <div class="faq">
+          <details>
+            <summary>Máy Mac của tôi có dùng được không?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>DHbox chạy trên macOS 15 trở lên và được tối ưu cho máy Apple Silicon (M1 trở lên). Một số phần cần macOS 26 trở lên: giao diện Liquid Glass, AI chạy trên máy (cần bật Apple Intelligence) và công tắc trong Control Center. Trên macOS 15, các phần này có phương án thay thế, app vẫn dùng bình thường.</p>
+          </details>
+          <details>
+            <summary>DHbox có sửa giao diện Finder, Dock hay thanh menu không?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Không. DHbox chỉ cắm thêm qua các cổng mở rộng chính thức của macOS (extension Finder, Quick Look, App Intents) và tự dựng Soft Notch là một cửa sổ riêng. Không cần tắt SIP, không chèn mã vào app khác. Gỡ DHbox là máy trở lại như cũ.</p>
+          </details>
+          <details>
+            <summary>Dùng thử thế nào?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Tải về và mở app là bắt đầu 7 ngày dùng thử với đầy đủ tính năng. Không cần thẻ hay tài khoản. Hết hạn, bạn mua mã ngay trong app để dùng tiếp.</p>
+          </details>
+          <details>
+            <summary>Lần đầu mở, macOS báo không mở được ứng dụng?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Kéo DHbox vào thư mục Applications, rồi bấm chuột phải vào DHbox, chọn Mở, và bấm Mở lần nữa. Nếu vẫn bị chặn, vào Cài đặt hệ thống, mục Quyền riêng tư và bảo mật, kéo xuống và bấm Vẫn mở. Chỉ cần làm một lần; các bản cập nhật sau tự cài trong app.</p>
+          </details>
+          <details>
+            <summary>Giá bao nhiêu, có phải trả hằng tháng không?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>249.000đ một lần, dùng trọn đời, không thuê bao. Thanh toán bằng chuyển khoản VietQR ngay trong app; tiền về là app tự kích hoạt và mã cũng được gửi qua email.</p>
+          </details>
+          <details>
+            <summary>Một mã dùng được mấy máy? Đổi máy thì sao?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Mỗi mã dùng trên 2 máy Mac cùng lúc. Khi đổi máy, bạn gỡ máy cũ ngay trong app (mục Bản quyền) rồi kích hoạt trên máy mới. Quên mã thì dùng tính năng lấy lại mã qua email.</p>
+          </details>
+          <details>
+            <summary>Dữ liệu của tôi có rời khỏi máy không?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Mặc định là không. Hộp đen, tua lại tệp, chỉ mục tìm kiếm và AI đều chạy và lưu trên máy, dữ liệu nhạy cảm được mã hóa với khóa giữ trong Keychain. DHbox chỉ kết nối mạng để kiểm tra bản quyền và bản cập nhật.</p>
+          </details>
+          <details>
+            <summary>Vì sao DHbox xin quyền Trợ năng, Ghi màn hình?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Mỗi quyền chỉ được hỏi khi bạn bật tính năng cần nó. Ví dụ Trợ năng cho xem trước cửa sổ và phím trong Finder, Ghi màn hình cho ảnh xem trước cửa sổ. Trang Quyền trong Cài đặt cho biết tính năng nào dùng quyền nào. Thu hồi quyền thì tính năng đó tắt êm, app không bị lỗi.</p>
+          </details>
+          <details>
+            <summary>Cập nhật bản mới thế nào?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>DHbox tự kiểm tra bản mới mỗi ngày. Bạn bấm cập nhật hoặc bật tự tải và cài trong Cài đặt, mục Cập nhật. Mỗi bản đều được kiểm tra chữ ký số trước khi cài.</p>
+          </details>
+          <details>
+            <summary>Cần hỗ trợ thì liên hệ ở đâu?<svg class="ico"><use href="#i-chevron"/></svg></summary>
+            <p>Gửi email tới <a href="mailto:devhousesoftware.inc@gmail.com">devhousesoftware.inc@gmail.com</a> hoặc gọi, nhắn Zalo <a href="tel:0869528304">0869 528 304</a> (thứ Hai đến thứ Sáu, 08:30 đến 18:00).</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section cta" id="tai-ve">
+      <div class="container">
+        <div class="cta__box">
+          <img src="assets/img/dhbox-icon.png" alt="Biểu tượng DHbox" width="112" height="112" class="cta__icon">
+          <h2>Sẵn sàng để Mac<br>làm được nhiều hơn?</h2>
+          <p class="section__lead">Tải DHbox, dùng thử 7 ngày với đầy đủ tính năng.</p>
+          <a class="btn btn--primary btn--lg" href="https://github.com/minhvuogdzz/DHbox-releases/releases/latest" data-download>
+            <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span>
+            <span class="btn__label">Tải DHbox cho Mac</span>
+          </a>
+          <p class="cta__meta mono">
+            <span>DHbox <span data-release-version>1.4</span></span>
+            <span data-release-date></span>
+            <span data-release-size></span>
+            <span>macOS 15+</span>
+          </p>
+          <ol class="steps">
+            <li><span>1</span>Mở tệp <b class="mono">.dmg</b> vừa tải</li>
+            <li><span>2</span>Kéo DHbox vào <b>Applications</b></li>
+            <li><span>3</span>Lần đầu: chuột phải, chọn <b>Mở</b></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="#top"><img src="assets/img/dhbox-icon-256.png" alt="" width="30" height="30"><span>DHbox</span></a>
+        <p>DHbox là bộ tiện ích cho Mac do Devhouse Software phát triển tại Việt Nam. Nhẹ, riêng tư, làm đúng việc.</p>
+      </div>
+      <div>
+        <h4>Sản phẩm</h4>
+        <a href="#tinh-nang">Tính năng</a>
+        <a href="#hanh-dong">Thư viện hành động</a>
+        <a href="#tat-ca">Tất cả tính năng</a>
+        <a href="#gia">Giá</a>
+        <a href="#tai-ve" data-download>Tải về</a>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <a href="#hoi-dap">Hỏi đáp</a>
+        <a href="https://github.com/minhvuogdzz/DHbox-releases/releases" target="_blank" rel="noopener">Ghi chú phát hành</a>
+        <a href="dieu-khoan.html">Điều khoản sử dụng</a>
+        <a href="chinh-sach-bao-mat.html">Chính sách quyền riêng tư</a>
+      </div>
+      <div class="footer__contact">
+        <h4>Liên hệ</h4>
+        <a href="mailto:devhousesoftware.inc@gmail.com"><svg class="ico"><use href="#i-mail"/></svg>devhousesoftware.inc@gmail.com</a>
+        <a href="tel:0869528304"><svg class="ico"><use href="#i-phone"/></svg>0869 528 304 (Hotline, Zalo)</a>
+        <span><svg class="ico"><use href="#i-clock"/></svg>Thứ Hai – Thứ Sáu, 08:30 – 18:00</span>
+        <span><svg class="ico"><use href="#i-pin"/></svg>Phường Tây Hồ, Thành phố Hà Nội</span>
+      </div>
+    </div>
+    <div class="container footer__legal">
+      <p>© <span id="year">2026</span> Công ty TNHH Phát triển công nghệ Devhouse Software. Bảo lưu mọi quyền.</p>
+      <p class="muted">Mac, macOS và Finder là nhãn hiệu của Apple Inc. DHbox không liên kết với Apple.</p>
+    </div>
+  </footer>
+
+  <!-- Install guide shown after the download starts -->
+  <div class="sheet" id="install-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+    <div class="sheet__backdrop" data-close></div>
+    <div class="sheet__panel">
+      <button class="icon-btn sheet__close" type="button" data-close aria-label="Đóng"><svg class="ico"><use href="#i-x"/></svg></button>
+      <div class="sheet__status">
+        <span class="sheet__badge"><svg class="ico"><use href="#i-check"/></svg></span>
+        <div>
+          <h3 id="sheet-title">Đang tải DHbox</h3>
+          <p class="mono muted" id="sheet-file">DHbox.dmg</p>
+        </div>
+      </div>
+      <ol class="steps steps--col">
+        <li><span>1</span><div><b>Mở tệp .dmg</b> trong thư mục Tải về khi tải xong.</div></li>
+        <li><span>2</span><div><b>Kéo DHbox vào Applications</b> trong cửa sổ vừa mở.</div></li>
+        <li><span>3</span><div><b>Lần đầu mở:</b> bấm chuột phải vào DHbox, chọn Mở, rồi bấm Mở lần nữa.</div></li>
+      </ol>
+      <p class="sheet__foot muted">Không thấy tệp tải xuống? <a href="#" id="sheet-retry">Tải lại</a> hoặc <a href="https://github.com/minhvuogdzz/DHbox-releases/releases/latest" target="_blank" rel="noopener" id="sheet-direct">mở trang phát hành</a>.</p>
+    </div>
+  </div>
+
+  <div class="toast-live" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="vi" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chính sách quyền riêng tư — DHbox</title>
+  <meta name="description" content="Cách DHbox xử lý dữ liệu: mặc định xử lý trên máy, không gửi nội dung của bạn ra ngoài.">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>try { var t = localStorage.getItem('dhbox-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m0 0-5-5m5 5-5 5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+      <symbol id="i-notch" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8.5 4v1.5a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V4"/></symbol>
+      <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18"/><circle cx="6" cy="7" r=".4"/><circle cx="8" cy="7" r=".4"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h3.6l2 2.2h7.4A2.5 2.5 0 0 1 21 9.7v7.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4.5 17a8.5 8.5 0 1 1 15 0"/><path d="m12 13 4-4.5"/><circle cx="12" cy="13" r="1.2"/></symbol>
+      <symbol id="i-rewind" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.6"/><path d="M4 4v4.6h4.6M12 8v4.5l3 2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.3 3 7.8 7 9.5 4-1.7 7-5.2 7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+      <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="5" rx="1.5"/><rect x="14" y="15" width="7" height="5" rx="1.5"/><path d="M6.5 9v3.5a2 2 0 0 0 2 2h9V15"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+      <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="i-menubar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8h18M15 6h3"/><rect x="12" y="10" width="7" height="6" rx="1.2"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+      <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.5 3h7.5l4.5 4.5V19a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v4.5h4.5M8.5 13h7M8.5 16.5h5"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="m3.5 17.5 5-5 4 4 2.5-2.5 5 5"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5M12.5 15h4.5"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8.5-8.5M16 7l2.5 2.5M14 9l2 2"/></symbol>
+      <symbol id="i-dock" viewBox="0 0 24 24"><rect x="2.5" y="15" width="19" height="5.5" rx="2"/><rect x="5" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="9" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="13" y="16.7" width="2.2" height="2.2" rx=".6"/><rect x="7" y="4" width="10" height="7.5" rx="1.5"/></symbol>
+      <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+      <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 8h11v6a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 9.5h1.5a2.5 2.5 0 0 1 0 5H16M8 3.5v2M11 3.5v2"/></symbol>
+    </defs>
+  </svg>
+  <header class="nav is-stuck" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html" aria-label="DHbox, trang chủ"><img src="assets/img/dhbox-icon-256.png" alt="" width="30" height="30"><span>DHbox</span></a>
+      <nav class="nav__links" aria-label="Điều hướng chính">
+        <a href="index.html#tinh-nang">Tính năng</a>
+        <a href="index.html#gia">Giá</a>
+        <a href="index.html#hoi-dap">Hỏi đáp</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Đổi giao diện sáng hoặc tối">
+          <svg class="ico ico--sun"><use href="#i-sun"/></svg><svg class="ico ico--moon"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn--primary btn--sm" href="index.html#tai-ve" data-download>
+          <span class="btn__icon"><svg class="ico"><use href="#i-download"/></svg></span><span class="btn__label">Tải về</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="legal">
+    <div class="container container--narrow">
+      <h1>Chính sách quyền riêng tư</h1>
+      <p class="updated">Cập nhật ngày 11/11/2026</p>
+
+      <h2>1. Nguyên tắc</h2>
+      <p>DHbox được thiết kế để xử lý trên máy. Mặc định, nội dung của bạn (tệp, clipboard, lịch sử sức khỏe máy, chỉ mục tìm kiếm) không rời khỏi máy Mac của bạn.</p>
+      <h2>2. Dữ liệu lưu trên máy</h2>
+      <ul>
+        <li>Hộp đen: số liệu CPU, bộ nhớ, pin, ổ đĩa và tên tiến trình, giữ chi tiết 48 giờ và bản tổng hợp 30 ngày.</li>
+        <li>Tua lại tệp: bản sao các tệp trong thư mục bạn chọn theo dõi.</li>
+        <li>Bảo vệ secret: chỉ lưu dấu vân tay (mã băm) để nhận ra lại, không lưu nguyên văn secret.</li>
+        <li>Chỉ mục tìm kiếm, ảnh chụp cấu hình và các cài đặt.</li>
+      </ul>
+      <p>Dữ liệu nhạy cảm được mã hóa, khóa giữ trong Keychain của macOS. Bạn có thể xóa sạch toàn bộ dữ liệu trong Cài đặt.</p>
+      <h2>3. Dữ liệu gửi đi</h2>
+      <ul>
+        <li><b>Bản quyền:</b> khi mua và kích hoạt, DHbox gửi email bạn nhập, mã kích hoạt và một mã băm phần cứng (không phải số serial) tới máy chủ bản quyền để xác nhận và giới hạn số máy. Mỗi lần mở app, DHbox hỏi máy chủ một lần để biết mã còn hiệu lực.</li>
+        <li><b>Cập nhật:</b> DHbox đọc danh sách bản phát hành từ GitHub để kiểm tra bản mới.</li>
+        <li><b>Đo tốc độ mạng:</b> chỉ khi bạn bấm đo, dùng công cụ có sẵn của macOS với máy chủ của Apple.</li>
+      </ul>
+      <p>DHbox không gửi nội dung tệp, clipboard hay số liệu hệ thống của bạn đi đâu. Không có quảng cáo, không bán dữ liệu.</p>
+      <h2>4. Quyền hệ thống</h2>
+      <p>DHbox chỉ xin quyền (Trợ năng, Ghi màn hình, Truy cập toàn bộ ổ đĩa, Thông báo, Tự động hóa) khi bạn bật tính năng cần quyền đó và luôn giải thích lý do. Bạn có thể thu hồi quyền bất cứ lúc nào trong Cài đặt hệ thống; tính năng liên quan sẽ tắt mà không ảnh hưởng phần còn lại.</p>
+      <h2>5. Tính năng thử nghiệm</h2>
+      <p>Nhớ màn hình và Trợ lý thao tác mặc định tắt. Nhớ màn hình chỉ lưu chữ nhận diện được, không lưu video, có danh sách app loại trừ và nút tạm dừng.</p>
+      <h2>6. Website</h2>
+      <p>Website này không dùng cookie theo dõi. Nút tải về gọi GitHub API để lấy bản mới nhất; GitHub có thể ghi nhận địa chỉ IP theo chính sách của họ. Lựa chọn giao diện sáng, tối được lưu trong trình duyệt của bạn.</p>
+      <h2>7. Liên hệ</h2>
+      <p>Nếu có câu hỏi hoặc muốn yêu cầu xóa dữ liệu bản quyền gắn với email của bạn, vui lòng liên hệ:</p>
+      <div class="company">
+        <p><b>Công ty TNHH Phát triển công nghệ Devhouse Software</b></p>
+        <p>Địa chỉ: Phường Tây Hồ, Thành phố Hà Nội</p>
+        <p>Email: <a href="mailto:devhousesoftware.inc@gmail.com">devhousesoftware.inc@gmail.com</a></p>
+        <p>Hotline, Zalo: <a href="tel:0869528304">0869 528 304</a> (thứ Hai đến thứ Sáu, 08:30 đến 18:00)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__about">
+        <a class="brand" href="index.html#top"><img src="assets/img/dhbox-icon-256.png" alt="" width="30" height="30"><span>DHbox</span></a>
+        <p>DHbox là bộ tiện ích cho Mac do Devhouse Software phát triển tại Việt Nam. Nhẹ, riêng tư, làm đúng việc.</p>
+      </div>
+      <div>
+        <h4>Sản phẩm</h4>
+        <a href="index.html#tinh-nang">Tính năng</a>
+        <a href="index.html#hanh-dong">Thư viện hành động</a>
+        <a href="index.html#tat-ca">Tất cả tính năng</a>
+        <a href="index.html#gia">Giá</a>
+        <a href="index.html#tai-ve" data-download>Tải về</a>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <a href="index.html#hoi-dap">Hỏi đáp</a>
+        <a href="https://github.com/minhvuogdzz/DHbox-releases/releases" target="_blank" rel="noopener">Ghi chú phát hành</a>
+        <a href="dieu-khoan.html">Điều khoản sử dụng</a>
+        <a href="chinh-sach-bao-mat.html">Chính sách quyền riêng tư</a>
+      </div>
+      <div class="footer__contact">
+        <h4>Liên hệ</h4>
+        <a href="mailto:devhousesoftware.inc@gmail.com"><svg class="ico"><use href="index.html#i-mail"/></svg>devhousesoftware.inc@gmail.com</a>
+        <a href="tel:0869528304"><svg class="ico"><use href="index.html#i-phone"/></svg>0869 528 304 (Hotline, Zalo)</a>
+        <span><svg class="ico"><use href="index.html#i-clock"/></svg>Thứ Hai – Thứ Sáu, 08:30 – 18:00</span>
+        <span><svg class="ico"><use href="index.html#i-pin"/></svg>Phường Tây Hồ, Thành phố Hà Nội</span>
+      </div>
+    </div>
+    <div class="container footer__legal">
+      <p>© <span id="year">2026</span> Công ty TNHH Phát triển công nghệ Devhouse Software. Bảo lưu mọi quyền.</p>
+      <p class="muted">Mac, macOS và Finder là nhãn hiệu của Apple Inc. DHbox không liên kết với Apple.</p>
+    </div>
+  </footer>
+
+  <div class="sheet" id="install-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+    <div class="sheet__backdrop" data-close></div>
+    <div class="sheet__panel">
+      <button class="icon-btn sheet__close" type="button" data-close aria-label="Đóng"><svg class="ico"><use href="#i-x"/></svg></button>
+      <div class="sheet__status">
+        <span class="sheet__badge"><svg class="ico"><use href="#i-check"/></svg></span>
+        <div><h3 id="sheet-title">Đang tải DHbox</h3><p class="mono muted" id="sheet-file">DHbox.dmg</p></div>
+      </div>
+      <ol class="steps steps--col">
+        <li><span>1</span><div><b>Mở tệp .dmg</b> trong thư mục Tải về khi tải xong.</div></li>
+        <li><span>2</span><div><b>Kéo DHbox vào Applications</b> trong cửa sổ vừa mở.</div></li>
+        <li><span>3</span><div><b>Lần đầu mở:</b> bấm chuột phải vào DHbox, chọn Mở, rồi bấm Mở lần nữa.</div></li>
+      </ol>
+      <p class="sheet__foot muted">Không thấy tệp tải xuống? <a href="#" id="sheet-retry">Tải lại</a> hoặc <a href="https://github.com/minhvuogdzz/DHbox-releases/releases/latest" target="_blank" rel="noopener" id="sheet-direct">mở trang phát hành</a>.</p>
+    </div>
+  </div>
+  <div class="toast-live" id="toast" role="status" aria-live="polite" hidden></div>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
