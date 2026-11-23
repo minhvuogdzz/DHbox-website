@@ -10,8 +10,11 @@ Bản quyền thuộc Công ty TNHH Phát triển công nghệ Devhouse Software
 index.html                 Trang chủ: giới thiệu, tính năng, giá, hỏi đáp, tải về
 dieu-khoan.html            Điều khoản sử dụng
 chinh-sach-bao-mat.html    Chính sách quyền riêng tư
-assets/css/style.css       Giao diện (theme tối và sáng)
+assets/css/style.css       Giao diện chung (mặc định sáng, có theme tối)
+assets/css/showroom.css    MacBook vẽ bằng CSS và các cảnh mô phỏng
 assets/js/main.js          Tải về, danh sách tính năng, hỏi đáp, theme
+assets/js/demos.js         Mô phỏng ở đầu trang (notch, Dock, bảng menu bar)
+assets/js/showroom.js      Mười một cảnh mô phỏng bấm được cho các tính năng mới
 assets/img/                Icon app và ảnh chia sẻ
 ```
 
@@ -55,3 +58,10 @@ docker compose up -d --build
 - Cập nhật nội dung: `git pull && docker compose up -d --build`.
 
 Lưu ý: Dockerfile, nginx.conf và compose chưa được build thử trên máy viết (không có Docker), nên lần build đầu cần để ý lỗi nhỏ.
+
+## Cập nhật khi app ra bản mới
+
+- Số tính năng: thêm mục vào mảng `FEATURES` trong `assets/js/main.js` (đặt cờ thứ năm `true` nếu là tính năng mới). Trang tự đếm và điền vào mọi chỗ ghi số tính năng.
+- Cảnh mô phỏng: mỗi cảnh trong `assets/js/showroom.js` là một mục của `SCENES` (HTML dựng bằng JS, hàm `auto` là kịch bản con trỏ tự chạy). Số liệu trong cảnh là dữ liệu mẫu.
+- Bản dự phòng khi GitHub API lỗi: `FALLBACK_RELEASE` trong `assets/js/main.js` (hiện 2.9.1).
+- Giá: vẫn ở `PRICING` và phần Giá của `index.html`.

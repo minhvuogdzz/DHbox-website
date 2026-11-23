@@ -8,11 +8,11 @@
   var RELEASES_PAGE = 'https://github.com/' + RELEASES_REPO + '/releases/latest';
   // Used only when the GitHub API cannot be reached. Update now and then.
   var FALLBACK_RELEASE = {
-    version: '1.4.0',
-    url: 'https://github.com/minhvuogdzz/DHbox-releases/releases/download/v1.4.0/DHbox-1.4.0.dmg',
-    name: 'DHbox-1.4.0.dmg',
-    size: 18226907,
-    date: '2026-11-11T08:27:08Z'
+    version: '2.9.1',
+    url: 'https://github.com/minhvuogdzz/DHbox-releases/releases/download/v2.9.1/DHbox-2.9.1.dmg',
+    name: 'DHbox-2.9.1.dmg',
+    size: 34132480,
+    date: '2026-11-23T14:05:52Z'
   };
   // Keep in sync with the license server admin page.
   var PRICING = { price: '249.000đ', trialDays: 7, devices: 2 };
@@ -113,7 +113,9 @@
     { id: 'finder', name: 'Finder', icon: 'folder' },
     { id: 'actions', name: 'Hành động', icon: 'bolt' },
     { id: 'ai', name: 'AI và tự động', icon: 'chip' },
-    { id: 'menubar', name: 'Thanh menu', icon: 'menubar' }
+    { id: 'menubar', name: 'Thanh menu và Cài đặt', icon: 'menubar' },
+    { id: 'focus', name: 'Tập trung và ghi chú', icon: 'note' },
+    { id: 'devices', name: 'Thiết bị và kết nối', icon: 'wifi' }
   ];
   var FEATURES = [
     ['notch', 'Soft Notch', 'Phần mở rộng ngay dưới tai thỏ, mở khi rê chuột hoặc bấm, không cướp focus của app đang gõ.'],
@@ -182,7 +184,7 @@
     ['ai', 'Quy tắc tự động', 'Sự kiện, Điều kiện, Hành động: cắm màn hình, đổi Wi-Fi, pin yếu, mở app, tệp mới.'],
     ['ai', 'Phím tắt và Spotlight', 'Mọi hành động có trong app Phím tắt và Spotlight qua App Intents.'],
     ['ai', 'Control Center', 'Công tắc đóng băng app, tạm dừng tua lại tệp, giữ máy thức.'],
-    ['ai', 'Nhớ màn hình', 'Ghi lại chữ đã thấy trên màn hình để tìm lại, mặc định tắt, có loại trừ app.', true],
+    ['ai', 'Nhớ màn hình', 'Ghi lại chữ đã thấy trên màn hình để tìm lại, đọc tiếng Việt đúng dấu, mặc định tắt, có loại trừ app.', true],
     ['ai', 'Trợ lý thao tác', 'Ra lệnh bằng lời, xem trước từng bước, mọi việc có tác dụng phụ đều hỏi trước.', true],
     ['menubar', 'Bảng tổng quan', 'CPU từng nhân, bộ nhớ, áp lực bộ nhớ, bộ nhớ hoán đổi.'],
     ['menubar', 'Giữ máy thức', 'Theo giờ, đến khi tắt, hoặc cả khi gập máy.'],
@@ -191,7 +193,57 @@
     ['menubar', 'Ổ đĩa', 'Dung lượng, tổng đã đọc và ghi, tháo ổ ngoài nhanh.'],
     ['menubar', 'Pin', 'Sức khỏe, số lần sạc, nhiệt độ pin, app dùng nhiều năng lượng.'],
     ['menubar', 'Công tắc dừng khẩn cấp', 'Tắt toàn bộ tính năng chỉ với một cú bấm.'],
-    ['menubar', 'Cập nhật trong app', 'Tự kiểm tra mỗi ngày, bản mới được kiểm tra chữ ký số trước khi cài.']
+    ['menubar', 'Cập nhật trong app', 'Tự kiểm tra mỗi ngày, bản mới được kiểm tra chữ ký số trước khi cài.'],
+    // ---- Added since 1.5 (last item flag: new) ----
+    ['notch', 'Thông báo theo app', 'Chọn cho từng app: không hiện, hiện trên notch, hoặc hiện và bật chấm vàng. Chấm vàng chỉ dành cho cảnh báo của DHbox.', false, true],
+    ['notch', 'Ghim clipboard', 'Ghim mục để không bị đẩy ra khỏi lịch sử.', false, true],
+    ['notch', 'Dán lần lượt', 'Sao chép nhiều mục rồi dán từng cái theo thứ tự.', false, true],
+    ['notch', 'Thanh thao tác trên kệ', 'Nén, đổi định dạng, nhận dạng chữ ngay trên tệp ở kệ tạm.', false, true],
+    ['notch', 'Kéo tệp ra khỏi notch', 'Kéo ra chính tệp thật (bản sao, giữ tên gốc), bấm để chọn, nhấn Space để xem nhanh.', false, true],
+    ['notch', 'Hiện notch khi quay màn hình', 'Tùy chọn, mặc định tắt. Khi bật, tên tệp và nội dung thông báo cũng có trong bản quay.', false, true],
+    ['notch', 'Vuốt trên notch', 'Vuốt trên notch thu gọn để chỉnh âm lượng hoặc chuyển bài, mặc định tắt.', false, true],
+    ['windows', 'Nhớ vị trí cửa sổ theo bộ màn hình', 'Cắm lại màn hình ngoài thì cửa sổ về chỗ cũ. Mặc định tắt.', false, true],
+    ['windows', 'Hiệu ứng mở cửa sổ từ Dock', 'Bấm icon Dock để chuyển app, cửa sổ nổi lên và phóng mượt vào vị trí. Có công tắc để tắt.', false, true],
+    ['smooth', 'Space Lens', 'Bản đồ bong bóng theo dung lượng: đi sâu vào thư mục, dọn vào Thùng rác, hoàn tác được. Mở từ chuột phải trong Finder.', false, true],
+    ['smooth', 'DHbox nhẹ hơn', 'Cửa sổ Cài đặt chạy riêng và tự thoát khi đóng, ảnh trong clipboard và ảnh bìa nhạc chỉ giữ bản thu nhỏ. Khoảng 20 MB khi rảnh, theo ghi chú bản 2.5.0.', false, true],
+    ['security', 'Thư mục khóa', 'Khóa thư mục nhạy cảm bằng Touch ID hoặc mật khẩu riêng, mã hóa AES-256, tự khóa khi máy ngủ.', false, true],
+    ['finder', 'Gỡ cài đặt hoàn toàn', 'Chuột phải vào ứng dụng: xem trước mọi dấu vết và dung lượng, chuyển vào Thùng rác, có Hoàn tác. Mục cần quyền quản trị chỉ được liệt kê.', false, true],
+    ['finder', 'Xóa cache ứng dụng', 'Dọn riêng cache của một app, có xem trước và hoàn tác.', false, true],
+    ['finder', 'Xoay và lật hình', 'Xoay 90 độ, 180 độ, lật ngang, lật dọc, xem trước, lưu bản sao hoặc ghi đè, giữ color profile, hoàn tác bằng ⌘Z.', false, true],
+    ['finder', 'Quick Look thư mục', 'Nhấn Space trên thư mục để duyệt bên trong: mở thư mục con, xem trước từng tệp, ảnh vẽ sắc nét.', false, true],
+    ['finder', 'Shift Return để đổi tên', 'Đổi tên tệp bằng phím như quen tay trên Windows, tùy chọn trong Cài đặt.', false, true],
+    ['finder', 'Gắn thẻ màu bằng phím', 'Command phải hoặc Option phải kèm 1 đến 8 để gắn thẻ màu, ấn lại để gỡ.', false, true],
+    ['finder', 'Một mục DHbox duy nhất', 'Mọi thao tác gom vào một mục có menu con ở Finder và ở menu Dịch vụ, dùng được cả trong Google Drive, iCloud Drive và ổ ngoài.', false, true],
+    ['actions', 'Chụp màn hình có chú thích', '⌘⇧1 chụp cả màn hình, ⌘⇧2 kéo chọn vùng. Vẽ bút, mũi tên, khung, thêm chữ, chọn màu rồi sao chép hoặc lưu.', false, true],
+    ['actions', 'Chọn màu trên màn hình', '⌃⌥P lấy màu bất kỳ: HEX, HSL, RGB và độ tương phản WCAG.', false, true],
+    ['actions', 'Dịch chữ đã sao chép', 'Dịch ngay trên máy, không gửi nội dung đi đâu. Cần macOS 15 trở lên.', false, true],
+    ['actions', 'Lời nhắc bằng một câu', 'Gõ “nhắc tôi 3h chiều mai gọi khách” vào bảng lệnh để tạo lời nhắc trong app Lời nhắc.', false, true],
+    ['ai', 'Theo dõi AI Agent trên notch', 'Xem các phiên Claude Code đang chạy, duyệt hoặc từ chối quyền ngay trên notch, nhảy về terminal, xem hạn mức. Cần bấm Nối với Claude Code để bật.', true, true],
+    ['ai', 'Đánh thức Claude', 'Gửi một tin nhắn nhỏ qua Claude Code để mở chu kỳ 5 giờ đúng lúc bạn muốn, giữ máy thức tới lúc đó.', false, true],
+    ['ai', 'Trợ lý trong cửa sổ nổi', 'Mở bằng ⌃⌥A hoặc từ bảng lệnh, có gợi ý bấm sẵn và câu mẫu khi trợ lý chưa hiểu yêu cầu.', true, true],
+    ['ai', 'Liên kết hệ sinh thái DH', 'Chuột phải thư mục khách rồi chạy DH Studio Pro: Contact the Sheet để cập nhật Google Sheets hàng loạt. Mặc định tắt, cần DH Studio Pro 3.5.0 trở lên.', false, true],
+    ['focus', 'Ghi chú trên notch', 'Nhiều ghi chú, gắn màu và mức quan trọng, mở ngay trên notch. Ghi chú cũ trở thành ghi chú đầu tiên.', false, true],
+    ['focus', 'Định dạng như Ghi chú của Apple', 'Chữ đậm, nghiêng, gạch chân, tiêu đề, danh sách đánh số và dấu chấm, phím tắt ⌘B, ⌘I, ⌘U.', false, true],
+    ['focus', 'Danh sách việc cần làm', 'Danh sách có ô tick: gõ [] rồi cách, hoặc ⇧⌘L.', false, true],
+    ['focus', 'Ảnh trong ghi chú', 'Dán bằng ⌘V hoặc kéo thả, mỗi ảnh có nhãn riêng cho VoiceOver.', false, true],
+    ['focus', 'Khóa ghi chú', 'Khóa bằng Touch ID hoặc mật khẩu máy. Ghi chú đã xóa giữ 30 ngày trong Đã xóa gần đây.', false, true],
+    ['focus', 'Chế độ làm việc', 'Một công tắc đóng băng app gây xao nhãng, lọc thông báo và chạy hẹn giờ.', false, true],
+    ['focus', 'Thời gian dùng từng app', 'Thống kê thời gian dùng app, chỉ lưu trên máy.', false, true],
+    ['focus', 'Khóa bàn phím để lau', 'Chặn mọi phím trong 5 phút, chuột vẫn dùng được. Cần quyền Trợ năng.', false, true],
+    ['devices', 'Bluetooth và pin thiết bị', 'Thiết bị đã ghép đôi, kết nối hoặc ngắt bằng một nút, pin AirPods, chuột, bàn phím khi đọc được.', false, true],
+    ['devices', 'Danh sách Wi-Fi', 'Bật tắt, xem độ mạnh sóng, bấm một mạng để vào.', false, true],
+    ['devices', 'Chia sẻ Wi-Fi bằng mã QR', 'Cho khách vào mạng không cần đọc mật khẩu.', false, true],
+    ['devices', 'AirDrop thả tệp', 'Kéo tệp thả vào ô AirDrop để gửi ngay, xem ai đang thấy máy này.', false, true],
+    ['devices', 'Điều khiển quạt', 'Tab Quạt trên notch và menu bar: tốc độ từng quạt, nhiệt độ CPU và GPU. Ba chế độ Hệ thống, Cố định, Theo nhiệt độ (Êm, Cân bằng, Mát).', false, true],
+    ['devices', 'An toàn khi chỉnh quạt', 'Quạt tự trả về cho hệ thống khi DHbox thoát, máy từ 92 độ, mất cảm biến. Chỉnh quạt cần một thành phần quản trị cài một lần; Mac M3 trở lên chỉ xem được quạt.', false, true],
+    ['devices', 'DHbox Mirror', 'Màn hình iPhone trong một cửa sổ trên Mac qua Wi-Fi, ghép đôi bằng mã QR, mã hóa đầu cuối, mặc định tắt. Cần app DHbox Mirror trên iPhone (iOS 18 trở lên).', false, true],
+    ['devices', 'Cài đặt theo từng màn hình', 'Bật tắt notch, xem trước Dock, chụp màn hình và danh sách cửa sổ cho từng màn hình. Nhận diện màn hình, đặt làm màn hình chính.', false, true],
+    ['devices', 'Tắt màn hình trong máy', 'Khi cắm màn hình ngoài, tắt màn hình của Mac mà luôn có đường khôi phục.', false, true],
+    ['menubar', 'Cài đặt có ô Tìm', 'Gõ có dấu hay không dấu, tiếng Anh hay tên thường gọi (screenshot, touch id, claude) đều ra mục cần tìm.', false, true],
+    ['menubar', 'Tiếng Việt và English', 'Chọn ngôn ngữ trong Cài đặt chung, hoặc theo hệ thống.', false, true],
+    ['menubar', 'Xem nhanh bằng mô phỏng', 'Mục Cửa sổ và Soft Notch trong Cài đặt có màn hình giả chạy cảnh mô phỏng: con trỏ, phím, cửa sổ, notch.', false, true],
+    ['menubar', 'Lịch sử phiên bản trong app', 'Mục Giới thiệu hiện năm bản mới nhất cùng ghi chú.', false, true],
+    ['menubar', 'Cài lần đầu bằng một dòng lệnh', 'Tập lệnh kiểm SHA-256, chữ ký Ed25519 và chứng chỉ ký trước khi thay app. Không cần mật khẩu, không dùng sudo, macOS không chặn.', false, true]
   ];
   var groupById = {};
   GROUPS.forEach(function (g) { groupById[g.id] = g; });
@@ -225,14 +277,14 @@
 
   function renderFilters() {
     if (!filters) return;
-    var all = [{ id: 'all', name: 'Tất cả' }].concat(GROUPS);
+    var all = [{ id: 'all', name: 'Tất cả' }, { id: 'new', name: 'Mới từ bản 1.5' }].concat(GROUPS);
     all.forEach(function (g) {
       var b = el('button', g.id === currentGroup ? 'is-on' : '');
       b.type = 'button';
       b.dataset.group = g.id;
       b.setAttribute('aria-pressed', String(g.id === currentGroup));
       b.appendChild(document.createTextNode(g.name));
-      var count = g.id === 'all' ? FEATURES.length : FEATURES.filter(function (f) { return f[0] === g.id; }).length;
+      var count = g.id === 'all' ? FEATURES.length : g.id === 'new' ? FEATURES.filter(function (f) { return f[4]; }).length : FEATURES.filter(function (f) { return f[0] === g.id; }).length;
       b.appendChild(el('small', null, String(count)));
       b.addEventListener('click', function () {
         currentGroup = g.id;
@@ -255,7 +307,7 @@
     var shown = 0, matched = 0;
     var limit = (!expanded && currentGroup === 'all' && !words.length) ? COLLAPSED : Infinity;
     FEATURES.forEach(function (f, i) {
-      if (currentGroup !== 'all' && f[0] !== currentGroup) return;
+      if (currentGroup === 'new' ? !f[4] : (currentGroup !== 'all' && f[0] !== currentGroup)) return;
       var hay = foldSearch(f[1] + ' ' + f[2] + ' ' + groupById[f[0]].name);
       for (var w = 0; w < words.length; w++) if (hay.indexOf(words[w]) === -1) return;
       matched++;
@@ -264,6 +316,7 @@
       card.style.animationDelay = Math.min(shown, 12) * 25 + 'ms';
       if (currentGroup === 'all') card.appendChild(el('span', 'grp', groupById[f[0]].name));
       var h = el('h3', null, f[1]);
+      if (f[4]) h.appendChild(el('span', 'tag-new', 'Mới'));
       if (f[3]) h.appendChild(el('span', 'tag-exp', 'Thử nghiệm'));
       card.appendChild(h);
       card.appendChild(el('p', null, f[2]));
@@ -278,6 +331,7 @@
     }
   }
 
+  $$('[data-feature-count]').forEach(function (n) { n.textContent = String(FEATURES.length); });
   renderFilters();
   renderList();
   if (search) search.addEventListener('input', renderList);
@@ -455,6 +509,16 @@
       e.preventDefault();
       closeSheet();
       download(btn);
+    });
+  });
+
+  // Copy the one-line install command.
+  $$('[data-copy-cmd]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = $('[data-install-cmd]', btn.parentNode);
+      var text = code ? code.textContent : '';
+      var done = function () { toast('Đã chép lệnh. Dán vào Terminal rồi bấm Return.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done); else done();
     });
   });
 
