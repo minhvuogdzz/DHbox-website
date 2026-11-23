@@ -404,3 +404,7 @@
 
 .sr-swipe { display: none; text-align: center; font-size: .82rem; color: var(--text-3); margin: -8px 0 -14px; }
 @media (max-width: 700px) { .sr-swipe { display: block; } .sr-scroll > .mb { min-width: 580px; } }
+.cmd { grid-template-columns: minmax(0, 1fr); }
+.cmd__box { min-width: 0; }
+.sheet__panel { overflow: hidden; }
+.cmd__box code { white-space: normal; word-break: break-all; overflow-x: visible; line-height: 1.5; }
